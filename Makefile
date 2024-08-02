@@ -1,6 +1,6 @@
 TARGET = philo
 
-SRCS = main.c handle_argm_error.c print_error.c game_setting.c\
+SRCS = main.c handle_argm_error.c print_error.c\
 
 OBJS = $(SRCS:.c=.o)
 

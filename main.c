@@ -29,50 +29,19 @@ void    *thread_function(void   *arg)
     }
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    pthread_t   *threads;
-    t_player    *players;
-    int         i;
-    t_info      info;
-    int         num_threads;
+	pthread_t	*threads;
+	t_player	*players;
+	int			i;
+	t_info		info;
+	int			num_threads;
 
-    if (argc != 5)
-        print_error("The number of arguments is different !");
-    handle_argm_error(argv);
-    info = (t_info){0};
-    game_setting(argv, &players, &info);
-    num_threads = atoi(argv[1]);
-    threads = malloc(num_threads * sizeof(pthread_t));
-    if (!threads)
-        print_error("threads failed to allocated memory");
-    i = -1;
-    while (++i < atoi(argv[1]))
-    {
-        if (pthread_create(&threads[i], NULL, thread_function, &(players[i].thread_id)) != 0)
-        {
-            fprintf(stderr, "Error creating thread\n");
-            free(threads);
-            return (1);
-        }
-    }
-    i = -1;
-    while (++i < num_threads)
-    {
-        if (pthread_join(threads[i], NULL) != 0)
-        {
-            fprintf(stderr, "Error joining thread\n");
-            free(threads);
-            return (1);
-        }
-    }
-    i = -1;
-    while (++i < num_threads)
-    {
-        pthread_mutex_destroy(&players[i].mutex);
-        pthread_cond_destroy(&players[i].cond);
-    }
-    free(threads);
-    printf("Main thread is done\n");
+	if (!(argc == 5 || argc == 6))
+		print_error("The number of arguments is different !");
+	handle_argm_error(argc, argv, &info);
+	init_info(&info);
+	if (info.num_of_philo == 1)
+		handle_single_philosopher(&info);
     return (0);
 }
