@@ -2,9 +2,9 @@
 
 void    check_is_died(t_player *philo)
 {
-    printf("---------------------------\n");
-    printf("time_to_die ; %d\n", philo->info->time_to_die);
-    printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
+    // printf("---------------------------\n");
+    // printf("time_to_die ; %d\n", philo->info->time_to_die);
+    // printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
     if (philo->info->time_to_die < get_time() - philo->info->start_times - philo->last_eat_time)
         died(philo);
 }

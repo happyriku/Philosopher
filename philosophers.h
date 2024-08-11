@@ -26,6 +26,16 @@
 
 // typedef struct s_player	t_player;
 
+typedef enum e_color
+{
+	RED,
+	GREEN,
+	YELLOW,
+	BLUE,
+	BOLD,
+	STOP,
+}	t_color;
+
 typedef enum e_action
 {
 	TAKING,
@@ -77,5 +87,6 @@ void    thinking(t_player *philo);
 void	skip_to_time(int target_time, int start_time);
 void    print_action(t_player *philo, t_action action);
 void    handle_philosophers(t_info *info);
+char	*color(t_color color);
 
 #endif
