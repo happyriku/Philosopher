@@ -22,3 +22,12 @@ int	get_time(void)
 	time = tp.tv_sec * 1000 + tp.tv_usec / 1000;
 	return (time);
 }
+
+void	skip_to_time(int target_time, int start_time)
+{
+	while (target_time > get_time() - start_time)
+	{
+		usleep(100);
+	}
+	return ;
+}

@@ -25,7 +25,7 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 
 void	init_mutex(t_info *info)
 {
-	pthread_mutex_init(&info->fork, NULL);
+	pthread_mutex_init(info->fork, NULL);
 }
 
 void	init_info(t_info *info)

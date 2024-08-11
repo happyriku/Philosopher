@@ -21,6 +21,8 @@
 # include <sys/time.h>
 
 # define MAX_OF_PHILO 200
+# define SUCESS 0
+# define FAILED 1
 
 // typedef struct s_player	t_player;
 
@@ -33,18 +35,20 @@ typedef enum e_action
 	DIE,
 }	t_action;
 
+typedef struct s_info t_info;
+
 typedef struct s_player
 {
 	int				id;
 	int				right_fork;
 	int				left_fork;
 	t_info			*info;
-
+	pthread_t		thread;
+	int				last_eat_time;
 }	t_player;
 
 typedef struct s_info
 {
-	t_player		player_info;
 	int				num_of_philo;
 	int				time_to_die;
 	int				time_to_eat;
@@ -53,6 +57,7 @@ typedef struct s_info
 	int				start_times;
 	pthread_mutex_t	fork[MAX_OF_PHILO];
 	t_player		philo[MAX_OF_PHILO];
+	pthread_mutex_t	die;
 	bool			is_done;
 
 }	t_info;
@@ -60,5 +65,16 @@ typedef struct s_info
 int		main(int argc, char **argv);
 void	print_error(char *message);
 void	handle_argm_error(int argc, char **argv, t_info *info);
+void	init_info(t_info *info);
+void	handle_single_philosopher(t_info *info);
+int		get_time(void);
+void    died(t_player *philo);
+void    taking_fork(t_player *philo);
+void    eating_spaghetti(t_player *philo);
+void    sleeping(t_player *philo);
+void    thinking(t_player *philo);
+void	skip_to_time(int target_time, int start_time);
+void    print_action(t_player *philo, t_action action);
+void    handle_philosophers(t_info *info);
 
 #endif

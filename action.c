@@ -12,7 +12,38 @@
 
 #include "philosophers.h"
 
-void	action(t_info *info, t_action action)
+void    taking_fork(t_player *philo)
 {
+    pthread_mutex_lock(&philo->info->fork[philo->right_fork]);
+    print_action(philo, TAKING);
+    pthread_mutex_lock(&philo->info->fork[philo->left_fork]);
+    print_action(philo, TAKING);
+}
 
+void    eating_spaghetti(t_player *philo)
+{
+    print_action(philo, EATING);
+    pthread_mutex_unlock(&philo->info->fork[philo->right_fork]);
+    pthread_mutex_unlock(&philo->info->fork[philo->left_fork]);
+    philo->last_eat_time = get_time() - philo->info->start_times;
+    skip_to_time(philo->info->time_to_eat, philo->info->start_times);
+}
+
+void    sleeping(t_player *philo)
+{
+    print_action(philo, SLEEPING);
+    skip_to_time(philo->info->time_to_sleep, philo->info->start_times);
+}
+
+void    thinking(t_player *philo)
+{
+    print_action(philo, THINKING);
+}
+
+void    died(t_player *philo)
+{
+    pthread_mutex_lock(&philo->info->die);
+    print_action(philo, DIE);
+    philo->info->is_done = true;
+    pthread_mutex_unlock(&philo->info->die);
 }
