@@ -2,6 +2,8 @@
 
 void    *routine(t_player *philo)
 {
+    if (philo == NULL || philo->info == NULL)
+        print_error("philo or philo_info is NULL");
     while (!philo->info->is_done)
     {
         if (philo->id % 2 == 0)
@@ -24,5 +26,4 @@ void    handle_philosophers(t_info *info)
         pthread_create(&info->philo[i].thread, NULL, (void *)routine, &info->philo[i]);
         i++;
     }
-
 }
