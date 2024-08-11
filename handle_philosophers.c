@@ -1,5 +1,11 @@
 #include "philosophers.h"
 
+void    check_is_died(t_player *philo)
+{
+    if (philo->info->time_to_die < get_time() - philo->last_eat_time)
+        print_action(philo, DIE);
+}
+
 void    *routine(t_player *philo)
 {
     if (philo == NULL || philo->info == NULL)
@@ -13,6 +19,7 @@ void    *routine(t_player *philo)
         sleeping(philo);
         thinking(philo);
     }
+    check_is_died(philo);
 }
 
 void    handle_philosophers(t_info *info)
@@ -21,7 +28,7 @@ void    handle_philosophers(t_info *info)
 
     info->start_times = get_time();
     i = 0;
-    while (info->num_of_philo)
+    while (i < info->num_of_philo)
     {
         pthread_create(&info->philo[i].thread, NULL, (void *)routine, &info->philo[i]);
         i++;

@@ -21,6 +21,7 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 		philo->left_fork = 0;
 	else
 		philo->left_fork = num + 1;
+	philo->last_eat_time = 0;
 }
 
 void	init_mutex(t_info *info)
