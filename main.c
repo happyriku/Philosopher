@@ -52,6 +52,7 @@ int	main(int argc, char **argv)
 			print_error("mutex_destroy error\n");
 		i++;
 	}
+	
 	pthread_mutex_destroy(&info.die);
     return (0);
 }

@@ -2,8 +2,11 @@
 
 void    check_is_died(t_player *philo)
 {
-    if (philo->info->time_to_die < get_time() - philo->last_eat_time)
-        print_action(philo, DIE);
+    printf("---------------------------\n");
+    printf("time_to_die ; %d\n", philo->info->time_to_die);
+    printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
+    if (philo->info->time_to_die < get_time() - philo->info->start_times - philo->last_eat_time)
+        died(philo);
 }
 
 void    *routine(t_player *philo)
@@ -18,8 +21,8 @@ void    *routine(t_player *philo)
         eating_spaghetti(philo);
         sleeping(philo);
         thinking(philo);
+        check_is_died(philo);
     }
-    check_is_died(philo);
 }
 
 void    handle_philosophers(t_info *info)
@@ -33,4 +36,10 @@ void    handle_philosophers(t_info *info)
         pthread_create(&info->philo[i].thread, NULL, (void *)routine, &info->philo[i]);
         i++;
     }
+    i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_join(info->philo[i].thread, NULL);
+		i++;
+	}
 }

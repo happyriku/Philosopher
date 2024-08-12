@@ -58,6 +58,7 @@ typedef struct s_info
 	pthread_mutex_t	fork[MAX_OF_PHILO];
 	t_player		philo[MAX_OF_PHILO];
 	pthread_mutex_t	die;
+	pthread_mutex_t print_mutex;
 	bool			is_done;
 
 }	t_info;

@@ -32,7 +32,9 @@ void    eating_spaghetti(t_player *philo)
 void    sleeping(t_player *philo)
 {
     print_action(philo, SLEEPING);
+    //printf("---------------%d\n", get_time() - philo->info->start_times);
     skip_to_time(philo->info->time_to_sleep, philo->info->start_times);
+    //printf("----------------%d\n", get_time() - philo->info->start_times);
 }
 
 void    thinking(t_player *philo)
