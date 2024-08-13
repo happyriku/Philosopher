@@ -2,6 +2,7 @@
 
 void    handle_philo_die(t_player *philo, int time)
 {
+    //printf("---------------\n");
     pthread_mutex_lock(&philo->info->die);
     printf("%s%d %d died\n",color(RED), time, philo->id);
     philo->info->is_done = true;

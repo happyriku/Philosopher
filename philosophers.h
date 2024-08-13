@@ -54,6 +54,7 @@ typedef struct s_player
 	int				left_fork;
 	t_info			*info;
 	pthread_t		thread;
+	pthread_t		monitor_thread;
 	int				last_eat_time;
 }	t_player;
 
@@ -88,5 +89,6 @@ void	skip_to_time(int target_time, int start_time);
 void    print_action(t_player *philo, t_action action);
 void    handle_philosophers(t_info *info);
 char	*color(t_color color);
+bool    check_is_died(t_player *philo);
 
 #endif
