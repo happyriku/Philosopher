@@ -42,7 +42,7 @@ int	main(int argc, char **argv)
 	handle_argm_error(argc, argv, &info);
 	init_info(&info);
 	if (info.num_of_philo == 1)
-		handle_single_philosopher(&info);
+		handle_a_philosopher(&info);
 	else
 		handle_philosophers(&info);
 	i = 0;
@@ -52,6 +52,6 @@ int	main(int argc, char **argv)
 			print_error("mutex_destroy error\n");
 		i++;
 	}
-	pthread_mutex_destroy(&info.die);
+	pthread_mutex_destroy(&info.print_mutex);
     return (0);
 }

@@ -7,22 +7,21 @@ bool    check_is_died(t_player *philo)
     // printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
     if (philo->info->time_to_die <= get_time() - philo->info->start_times - philo->last_eat_time)
     {
-        print_action(philo, DIE);
+        classify_by_actions(philo, DIE);
         return (true);
     }
     return (false);
 }
 
-void    *routine(t_player *philo)
+void    *routine(void *philosopher)
 {
-    if (philo == NULL || philo->info == NULL)
-        print_error("philo or philo_info is NULL");
+    t_player *philo;
+
+    philo = (t_player *)philosopher;
+    if (philo->id % 2 == 0)
+        skip_to_time(100, philo->info->start_times);
     while (!philo->info->is_done)
     {
-        if (check_is_died(philo))
-            print_action(philo, DIE);
-        if (philo->id % 2 == 0)
-            skip_to_time(philo->info->time_to_eat, philo->info->start_times);
         taking_fork(philo);
         eating_spaghetti(philo);
         sleeping(philo);
@@ -30,26 +29,20 @@ void    *routine(t_player *philo)
     }
 }
 
-void    *monitor(t_info *info)
+void    *monitor(void *information)
 {
-    int i;
+    int     i;
+    t_info  *info;
 
+    info = (t_info  *)information;
     i = 0;
-    while (1)
+    while (!info->is_done)
     {
-        while (i < info->num_of_philo)
-        {
-            if (check_is_died(&info->philo[i]))
-                break ;
-            i++;
-            if (i == info->num_of_philo)
-            {
-                i = 0;
-                usleep(100);
-            }
-        }
-        if (info->is_done)
+        if (check_is_died(&info->philo[i]))
             break ;
+        i++;
+        if (i == info->num_of_philo)
+            i = 0;
     }
     return (NULL);
 }

@@ -68,7 +68,6 @@ typedef struct s_info
 	int				start_times;
 	pthread_mutex_t	fork[MAX_OF_PHILO];
 	t_player		philo[MAX_OF_PHILO];
-	pthread_mutex_t	die;
 	pthread_mutex_t print_mutex;
 	bool			is_done;
 
@@ -78,15 +77,15 @@ int		main(int argc, char **argv);
 void	print_error(char *message);
 void	handle_argm_error(int argc, char **argv, t_info *info);
 void	init_info(t_info *info);
-void	handle_single_philosopher(t_info *info);
+void	handle_a_philosopher(t_info *info);
 int		get_time(void);
-void    handle_philo_die(t_player *philo, int time);
+void    classify_by_actions(t_player *philo, t_action action);
 void    taking_fork(t_player *philo);
 void    eating_spaghetti(t_player *philo);
 void    sleeping(t_player *philo);
 void    thinking(t_player *philo);
 void	skip_to_time(int target_time, int start_time);
-void    print_action(t_player *philo, t_action action);
+void    output_action(t_player *philo, t_action action);
 void    handle_philosophers(t_info *info);
 char	*color(t_color color);
 bool    check_is_died(t_player *philo);

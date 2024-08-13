@@ -12,10 +12,10 @@
 
 #include "philosophers.h"
 
-void	handle_single_philosopher(t_info *info)
+void	handle_a_philosopher(t_info *info)
 {
 	info->start_times = get_time();
-	print_action(&info->philo[0], TAKING);
+	classify_by_actions(&info->philo[0], TAKING);
 	skip_to_time(info->time_to_die, info->start_times);
-	print_action(&info->philo[0], DIE);
+	classify_by_actions(&info->philo[0], DIE);
 }
