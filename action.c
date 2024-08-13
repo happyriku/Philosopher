@@ -39,12 +39,3 @@ void    thinking(t_player *philo)
 {
     print_action(philo, THINKING);
 }
-
-void    died(t_player *philo)
-{
-    pthread_mutex_lock(&philo->info->die);
-    print_action(philo, DIE);
-    philo->info->is_done = true;
-    pthread_mutex_unlock(&philo->info->die);
-    exit(0);
-}

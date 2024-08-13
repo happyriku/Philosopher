@@ -79,7 +79,7 @@ void	handle_argm_error(int argc, char **argv, t_info *info);
 void	init_info(t_info *info);
 void	handle_single_philosopher(t_info *info);
 int		get_time(void);
-void    died(t_player *philo);
+void    handle_philo_die(t_player *philo, int time);
 void    taking_fork(t_player *philo);
 void    eating_spaghetti(t_player *philo);
 void    sleeping(t_player *philo);

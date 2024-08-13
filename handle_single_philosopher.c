@@ -17,5 +17,5 @@ void	handle_single_philosopher(t_info *info)
 	info->start_times = get_time();
 	print_action(&info->philo[0], TAKING);
 	skip_to_time(info->time_to_die, info->start_times);
-	died(&info->philo[0]);
+	print_action(&info->philo[0], DIE);
 }
