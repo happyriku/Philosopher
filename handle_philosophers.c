@@ -13,20 +13,18 @@ bool    check_is_died(t_player *philo)
     return (false);
 }
 
-void    *routine(void *philosopher)
+bool    check_must_eat_times(t_player *philo)
 {
-    t_player *philo;
+    static int count = 0;
 
-    philo = (t_player *)philosopher;
-    if (philo->id % 2 == 0)
-        skip_to_time(100, philo->info->start_times);
-    while (!philo->info->is_done)
+    if (philo->eat_count == philo->info->num_of_times_must_eat)
+        count++;
+    if (count == philo->info->num_of_philo)
     {
-            taking_fork(philo);
-            eating_spaghetti(philo);
-            sleeping(philo);
-            thinking(philo);
+        philo->info->is_done = true;
+        return (true);
     }
+    return (false);
 }
 
 void    *monitor(void *information)
@@ -39,6 +37,8 @@ void    *monitor(void *information)
     while (!info->is_done)
     {
         if (check_is_died(&info->philo[i]))
+            break ;
+        if (check_must_eat_times(&info->philo[i]))
             break ;
         i++;
         if (i == info->num_of_philo)
@@ -63,9 +63,8 @@ void    handle_philosophers(t_info *info)
     i = 0;
 	while (i < info->num_of_philo)
 	{
-        printf("--------------------\n");
 		pthread_join(info->philo[i].thread, NULL);
-        printf("%d is ok\n", info->philo[i].id);
+        //printf("%d is ok\n", info->philo[i].id);
 		i++;
 	}
 }

@@ -22,12 +22,20 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 	else
 		philo->left_fork = num + 1;
 	philo->last_eat_time = 0;
+	philo->eat_count = 0;
 }
 
 void	init_mutex(t_info *info)
 {
-	pthread_mutex_init(info->fork, NULL);
+	int	i;
+
 	pthread_mutex_init(&info->print_mutex, NULL);
+	i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_mutex_init(&info->fork[i], NULL);
+		i++;
+	}
 }
 
 void	init_info(t_info *info)
@@ -35,10 +43,8 @@ void	init_info(t_info *info)
 	int	i;
 
 	info->start_times = 0;
-	info->philo[info->num_of_philo];
 	info->is_done = false;
 	init_mutex(info);
-	info->fork[info->num_of_philo];
 	i = 0;
 	while (i < info->num_of_philo)
 	{

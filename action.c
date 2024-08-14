@@ -23,6 +23,7 @@ void    taking_fork(t_player *philo)
 void    eating_spaghetti(t_player *philo)
 {
     classify_by_actions(philo, EATING);
+    philo->eat_count++;
     philo->last_eat_time = get_time() - philo->info->start_times;
     skip_to_time(philo->info->time_to_eat, philo->info);
     pthread_mutex_unlock(&philo->info->fork[philo->right_fork]);

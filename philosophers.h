@@ -56,6 +56,7 @@ typedef struct s_player
 	pthread_t		thread;
 	pthread_t		monitor_thread;
 	int				last_eat_time;
+	int				eat_count;
 }	t_player;
 
 typedef struct s_info
@@ -89,5 +90,6 @@ void    output_action(t_player *philo, t_action action);
 void    handle_philosophers(t_info *info);
 char	*color(t_color color);
 bool    check_is_died(t_player *philo);
+void    *routine(void *philosopher);
 
 #endif

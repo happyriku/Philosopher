@@ -2,7 +2,7 @@ TARGET = philo
 
 SRCS = main.c handle_argm_error.c print_error.c action.c get_time.c\
 		handle_a_philosopher.c init_info.c handle_philosophers.c classify_by_actions.c\
-		color.c
+		color.c routine.c
 
 OBJS = $(SRCS:.c=.o)
 
