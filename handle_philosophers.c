@@ -2,9 +2,9 @@
 
 bool    check_is_died(t_player *philo)
 {
-    // printf("---------------------------\n");
-    // printf("time_to_die ; %d\n", philo->info->time_to_die);
-    // printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
+    //printf("---------------------------\n");
+    //printf("time_to_die ; %d\n", philo->info->time_to_die);
+    //printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
     if (philo->info->time_to_die <= get_time() - philo->info->start_times - philo->last_eat_time)
     {
         classify_by_actions(philo, DIE);
@@ -17,13 +17,20 @@ bool    check_must_eat_times(t_player *philo)
 {
     static int count = 0;
 
-    if (philo->eat_count == philo->info->num_of_times_must_eat)
+    //pthread_mutex_lock(&philo->info->shared_mutex);
+    if (philo->eat_count == philo->info->num_of_times_must_eat
+            && philo->is_eaten == false)
+    {
         count++;
+        philo->is_eaten = true;
+    }
     if (count == philo->info->num_of_philo)
     {
         philo->info->is_done = true;
+        pthread_mutex_unlock(&philo->info->shared_mutex);
         return (true);
     }
+    //pthread_mutex_unlock(&philo->info->shared_mutex);
     return (false);
 }
 
@@ -64,7 +71,6 @@ void    handle_philosophers(t_info *info)
 	while (i < info->num_of_philo)
 	{
 		pthread_join(info->philo[i].thread, NULL);
-        //printf("%d is ok\n", info->philo[i].id);
 		i++;
 	}
 }

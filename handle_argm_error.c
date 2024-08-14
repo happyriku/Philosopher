@@ -21,7 +21,7 @@ void	handle_argm_error(int argc, char **argv, t_info *info)
 	if (argc == 6)
 		info->num_of_times_must_eat = atoi(argv[5]);
 	if (info->num_of_philo < 1 || info->num_of_philo == MAX_OF_PHILO)
-		print_error("please make sure argv[1] (0 < num_of_philo < 200)");
+		print_error("please make sure argv[1] (0 < num_of_philo < 201)");
 	if (info->time_to_die < 1)
 		print_error("please make sure argv[2] (0 < time_to_die)");
 	if (info->time_to_eat < 1)

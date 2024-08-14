@@ -20,7 +20,7 @@
 # include <stdbool.h>
 # include <sys/time.h>
 
-# define MAX_OF_PHILO 200
+# define MAX_OF_PHILO 201
 # define SUCESS 0
 # define FAILED 1
 
@@ -57,6 +57,7 @@ typedef struct s_player
 	pthread_t		monitor_thread;
 	int				last_eat_time;
 	int				eat_count;
+	bool			is_eaten;
 }	t_player;
 
 typedef struct s_info
@@ -70,8 +71,8 @@ typedef struct s_info
 	pthread_mutex_t	fork[MAX_OF_PHILO];
 	t_player		philo[MAX_OF_PHILO];
 	pthread_mutex_t print_mutex;
+	pthread_mutex_t	shared_mutex;
 	bool			is_done;
-
 }	t_info;
 
 int		main(int argc, char **argv);

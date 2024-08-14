@@ -23,6 +23,7 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 		philo->left_fork = num + 1;
 	philo->last_eat_time = 0;
 	philo->eat_count = 0;
+	philo->is_eaten = false;
 }
 
 void	init_mutex(t_info *info)
@@ -30,6 +31,7 @@ void	init_mutex(t_info *info)
 	int	i;
 
 	pthread_mutex_init(&info->print_mutex, NULL);
+	pthread_mutex_init(&info->shared_mutex, NULL);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
