@@ -84,7 +84,7 @@ void    taking_fork(t_player *philo);
 void    eating_spaghetti(t_player *philo);
 void    sleeping(t_player *philo);
 void    thinking(t_player *philo);
-void	skip_to_time(int target_time, int start_time);
+void	skip_to_time(int target_time, t_info *info);
 void    output_action(t_player *philo, t_action action);
 void    handle_philosophers(t_info *info);
 char	*color(t_color color);

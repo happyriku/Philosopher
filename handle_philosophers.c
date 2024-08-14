@@ -22,10 +22,10 @@ void    *routine(void *philosopher)
         skip_to_time(100, philo->info->start_times);
     while (!philo->info->is_done)
     {
-        taking_fork(philo);
-        eating_spaghetti(philo);
-        sleeping(philo);
-        thinking(philo);
+            taking_fork(philo);
+            eating_spaghetti(philo);
+            sleeping(philo);
+            thinking(philo);
     }
 }
 
@@ -63,7 +63,9 @@ void    handle_philosophers(t_info *info)
     i = 0;
 	while (i < info->num_of_philo)
 	{
+        printf("--------------------\n");
 		pthread_join(info->philo[i].thread, NULL);
+        printf("%d is ok\n", info->philo[i].id);
 		i++;
 	}
 }

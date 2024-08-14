@@ -23,11 +23,15 @@ int	get_time(void)
 	return (time);
 }
 
-void	skip_to_time(int target_time, int start_time)
+void	skip_to_time(int target_time, t_info *info)
 {
+	int start_time;
+
+	start_time = get_time();
 	while (target_time > get_time() - start_time)
 	{
-		usleep(100);
+		if (!info->is_done)
+			usleep(100);
 	}
 	return ;
 }

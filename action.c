@@ -24,7 +24,7 @@ void    eating_spaghetti(t_player *philo)
 {
     classify_by_actions(philo, EATING);
     philo->last_eat_time = get_time() - philo->info->start_times;
-    skip_to_time(philo->info->time_to_eat, get_time());
+    skip_to_time(philo->info->time_to_eat, philo->info);
     pthread_mutex_unlock(&philo->info->fork[philo->right_fork]);
     pthread_mutex_unlock(&philo->info->fork[philo->left_fork]);
 }
@@ -32,7 +32,7 @@ void    eating_spaghetti(t_player *philo)
 void    sleeping(t_player *philo)
 {
     classify_by_actions(philo, SLEEPING);
-    skip_to_time(philo->info->time_to_sleep, get_time());
+    skip_to_time(philo->info->time_to_sleep, philo->info);
 }
 
 void    thinking(t_player *philo)
