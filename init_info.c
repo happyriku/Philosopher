@@ -17,7 +17,7 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 	philo->info = info;
 	philo->id = num + 1;
 	philo->right_fork = num;
-	if (num == info->num_of_philo)
+	if (num + 1 == info->num_of_philo)
 		philo->left_fork = 0;
 	else
 		philo->left_fork = num + 1;
@@ -32,10 +32,11 @@ void	init_mutex(t_info *info)
 
 	pthread_mutex_init(&info->print_mutex, NULL);
 	pthread_mutex_init(&info->shared_mutex, NULL);
+	sem_init(&info->waiter, 0, 0);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
-		pthread_mutex_init(&info->fork[i], NULL);
+		sem_init(&info->fork[i], 0, 1);
 		i++;
 	}
 }

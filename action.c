@@ -14,10 +14,29 @@
 
 void    taking_fork(t_player *philo)
 {
-    pthread_mutex_lock(&philo->info->fork[philo->right_fork]);
-    classify_by_actions(philo, TAKING);
-    pthread_mutex_lock(&philo->info->fork[philo->left_fork]);
-    classify_by_actions(philo, TAKING);
+    sem_wait(&philo->info->waiter);
+    if (philo->id % 2 == 0)
+    {
+        sem_wait(&philo->info->fork[philo->left_fork]);
+        classify_by_actions(philo, TAKING);
+        if (sem_wait(&philo->info->fork[philo->right_fork]) != 0)
+        {
+            sem_post(&philo->info->fork[philo->left_fork]);
+            return ;
+        }
+        classify_by_actions(philo, TAKING);
+    }
+    else
+    {
+        sem_wait(&philo->info->fork[philo->right_fork]);
+        classify_by_actions(philo, TAKING);
+        if (sem_wait(&philo->info->fork[philo->left_fork]) != 0)
+        {
+            sem_post(&philo->info->fork[philo->right_fork]);
+            return ;
+        }
+        classify_by_actions(philo, TAKING);
+    }
 }
 
 void    eating_spaghetti(t_player *philo)
@@ -26,8 +45,9 @@ void    eating_spaghetti(t_player *philo)
     philo->eat_count++;
     philo->last_eat_time = get_time() - philo->info->start_times;
     skip_to_time(philo->info->time_to_eat, philo->info);
-    pthread_mutex_unlock(&philo->info->fork[philo->right_fork]);
-    pthread_mutex_unlock(&philo->info->fork[philo->left_fork]);
+    sem_post(&philo->info->fork[philo->right_fork]);
+    sem_post(&philo->info->fork[philo->left_fork]);
+    sem_post(&philo->info->waiter);
 }
 
 void    sleeping(t_player *philo)

@@ -2,11 +2,9 @@
 
 bool    check_is_died(t_player *philo)
 {
-    //printf("---------------------------\n");
-    //printf("time_to_die ; %d\n", philo->info->time_to_die);
-    //printf("id : %d, elapsed time ; %d\n", philo->id, get_time() - philo->info->start_times - philo->last_eat_time);
     if (philo->info->time_to_die <= get_time() - philo->info->start_times - philo->last_eat_time)
     {
+        printf("philo id : %d\n", philo->id);
         classify_by_actions(philo, DIE);
         return (true);
     }
@@ -17,7 +15,6 @@ bool    check_must_eat_times(t_player *philo)
 {
     static int count = 0;
 
-    //pthread_mutex_lock(&philo->info->shared_mutex);
     if (philo->eat_count == philo->info->num_of_times_must_eat
             && philo->is_eaten == false)
     {
@@ -30,8 +27,33 @@ bool    check_must_eat_times(t_player *philo)
         pthread_mutex_unlock(&philo->info->shared_mutex);
         return (true);
     }
-    //pthread_mutex_unlock(&philo->info->shared_mutex);
     return (false);
+}
+
+void    prioritizing_philo(t_player *philo)
+{
+    int max;
+    int max_id;
+    int i;
+
+    max = 0;
+    i = 0;
+    while (!philo->info->is_done)
+    {
+        i = 0;
+        while (i < philo->info->num_of_philo)
+        {
+            if (max < get_time() - philo[i].last_eat_time)
+            {
+
+                max = get_time() - philo[i].last_eat_time;
+                max_id = i;
+            }
+            i++;
+        }
+        sem_post(&philo[max_id].info->waiter);
+    }
+    return ;
 }
 
 void    *monitor(void *information)
@@ -43,6 +65,7 @@ void    *monitor(void *information)
     i = 0;
     while (!info->is_done)
     {
+        prioritizing_philo(info->philo);
         if (check_is_died(&info->philo[i]))
             break ;
         if (check_must_eat_times(&info->philo[i]))
@@ -66,7 +89,9 @@ void    handle_philosophers(t_info *info)
         i++;
     }
     pthread_create(&info->philo->monitor_thread, NULL, (void *)monitor, info);
+    // pthread_create(&info->philo->prioritize_thread, NULL, (void *)prioritizing_philo, info->philo);
     pthread_join(info->philo->monitor_thread, NULL);
+    // pthread_join(info->philo->prioritize_thread, NULL);
     i = 0;
 	while (i < info->num_of_philo)
 	{
