@@ -15,7 +15,6 @@
 void    taking_fork(t_player *philo)
 {
     sem_wait(&philo->info->waiter);
-    printf("------------%d\n", philo->id);
     if (philo->id % 2 == 0)
     {
         sem_wait(&philo->info->fork[philo->left_fork]);
@@ -49,7 +48,6 @@ void    eating_spaghetti(t_player *philo)
     sem_post(&philo->info->fork[philo->right_fork]);
     sem_post(&philo->info->fork[philo->left_fork]);
     sem_post(&philo->info->waiter);
-    printf("============\n");
 }
 
 void    sleeping(t_player *philo)

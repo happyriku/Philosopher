@@ -4,9 +4,6 @@ bool    check_is_died(t_player *philo)
 {
     if (philo->info->time_to_die <= get_time() - philo->info->start_times - philo->last_eat_time)
     {
-        printf("philo[0] -> time : %d\n", get_time() - philo->info->start_times - philo[0].last_eat_time);
-        printf("philo[1] -> time : %d\n", get_time() - philo->info->start_times - philo[1].last_eat_time);
-        printf("philo[2] -> time : %d\n", get_time() - philo->info->start_times - philo[2].last_eat_time);
         classify_by_actions(philo, DIE);
         return (true);
     }
@@ -23,36 +20,19 @@ void    *prioritizing_philo(t_player *philo)
     i = 0;
     while (!philo->info->is_done)
     {
-        i = 0;
-        while (i < philo->info->num_of_philo)
-        {
-            if (max < get_time() - philo[i].last_eat_time)
-            {
-
-                max = get_time() - philo[i].last_eat_time;
-                max_id = i;
-            }
-            i++;
-        }
-        sem_post(&philo[max_id].info->waiter);
-    }
-    return (NULL);
-}
-
-void    *monitor(void *information)
-{
-    int     i;
-    t_info  *info;
-
-    info = (t_info  *)information;
-    i = 0;
-    while (!info->is_done)
-    {
-        if (check_is_died(&info->philo[i]))
+        if (check_is_died(&philo[i]))
             break ;
+        if (max < get_time() - philo[i].last_eat_time)
+        {
+            max = get_time() - philo[i].last_eat_time;
+            max_id = i;
+        }
         i++;
-        if (i == info->num_of_philo)
+        if (i == philo->info->num_of_philo)
+        {
+            sem_post(&philo[max_id].info->waiter);
             i = 0;
+        }
     }
     return (NULL);
 }
@@ -69,9 +49,7 @@ void    handle_philosophers(t_info *info)
         i++;
     }
     pthread_create(&info->philo->prioritize_thread, NULL, (void *)prioritizing_philo, info->philo);
-    pthread_create(&info->philo->monitor_thread, NULL, (void *)monitor, info);
     pthread_join(info->philo->prioritize_thread, NULL);
-    pthread_join(info->philo->monitor_thread, NULL);
     i = 0;
 	while (i < info->num_of_philo)
 	{
