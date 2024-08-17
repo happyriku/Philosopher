@@ -54,5 +54,7 @@ int	main(int argc, char **argv)
 	}
 	sem_destroy(&info.waiter);
 	pthread_mutex_destroy(&info.print_mutex);
+	pthread_mutex_destroy(&info.eaten_mutex);
+	pthread_mutex_destroy(&info.done_mutex);
     return (0);
 }

@@ -31,7 +31,8 @@ void	init_mutex(t_info *info)
 	int	i;
 
 	pthread_mutex_init(&info->print_mutex, NULL);
-	pthread_mutex_init(&info->shared_mutex, NULL);
+	pthread_mutex_init(&info->eaten_mutex, NULL);
+	pthread_mutex_init(&info->done_mutex, NULL);
 	sem_init(&info->waiter, 0, 0);
 	i = 0;
 	while (i < info->num_of_philo)
