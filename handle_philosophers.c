@@ -4,6 +4,9 @@ bool    check_is_died(t_player *philo)
 {
     if (philo->info->time_to_die <= get_time() - philo->info->start_times - philo->last_eat_time)
     {
+        printf("philo[0] -> time : %d\n", get_time() - philo->info->start_times - philo[0].last_eat_time);
+        printf("philo[1] -> time : %d\n", get_time() - philo->info->start_times - philo[1].last_eat_time);
+        printf("philo[2] -> time : %d\n", get_time() - philo->info->start_times - philo[2].last_eat_time);
         classify_by_actions(philo, DIE);
         return (true);
     }
