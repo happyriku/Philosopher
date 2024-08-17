@@ -1,9 +1,11 @@
 #include "philosophers.h"
 
-bool    check_must_eat_times(t_player *philo)
+void    check_must_eat_times(t_player *philo)
 {
     static int count = 0;
 
+    philo->eat_count++;
+    philo->last_eat_time = get_time() - philo->info->start_times;
     if (philo->eat_count == philo->info->num_of_times_must_eat
             && philo->is_eaten == false)
     {
@@ -17,9 +19,7 @@ bool    check_must_eat_times(t_player *philo)
         pthread_mutex_lock(&philo->info->done_mutex);
         philo->info->is_done = true;
         pthread_mutex_unlock(&philo->info->done_mutex);
-        return (true);
     }
-    return (false);
 }
 
 void    *routine(void *philosopher)
@@ -31,8 +31,6 @@ void    *routine(void *philosopher)
     {
         taking_fork(philo);
         eating_spaghetti(philo);
-        if (check_must_eat_times(philo))
-            break ;
         sleeping(philo);
         thinking(philo);
     }

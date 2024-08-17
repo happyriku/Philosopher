@@ -72,11 +72,12 @@ typedef struct s_info
 	int				num_of_times_must_eat;
 	int				start_times;
 	t_player		philo[MAX_OF_PHILO];
+	pthread_mutex_t fork[MAX_OF_PHILO];
 	pthread_mutex_t print_mutex;
 	pthread_mutex_t	eaten_mutex;
 	pthread_mutex_t	done_mutex;
 	bool			is_done;
-	sem_t			fork[MAX_OF_PHILO];
+	//sem_t			fork[MAX_OF_PHILO];
 	sem_t			waiter;
 
 }	t_info;
@@ -99,6 +100,6 @@ char	*color(t_color color);
 bool    check_is_died(t_player *philo);
 void    *routine(void *philosopher);
 void    *prioritizing_philo(t_player *philo);
-bool    check_must_eat_times(t_player *philo);
+void    check_must_eat_times(t_player *philo);
 
 #endif

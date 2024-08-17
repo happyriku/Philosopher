@@ -33,11 +33,11 @@ void	init_mutex(t_info *info)
 	pthread_mutex_init(&info->print_mutex, NULL);
 	pthread_mutex_init(&info->eaten_mutex, NULL);
 	pthread_mutex_init(&info->done_mutex, NULL);
-	sem_init(&info->waiter, 0, 0);
+	//sem_init(&info->waiter, 0, 0);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
-		sem_init(&info->fork[i], 0, 1);
+		pthread_mutex_init(&info->fork[i], NULL);
 		i++;
 	}
 }

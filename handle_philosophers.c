@@ -12,25 +12,25 @@ bool    check_is_died(t_player *philo)
 
 void    *prioritizing_philo(t_player *philo)
 {
-    int max;
-    int max_id;
+    int min;
+    int min_id;
     int i;
 
-    max = 0;
+    min = 1;
     i = 0;
     while (!philo->info->is_done)
     {
         if (check_is_died(&philo[i]))
             break ;
-        if (max < get_time() - philo[i].last_eat_time)
-        {
-            max = get_time() - philo[i].last_eat_time;
-            max_id = i;
-        }
+        // if (min > philo[i].eat_count)
+        // {
+        //     min = philo[i].eat_count;
+        //     min_id = i;
+        // }
         i++;
         if (i == philo->info->num_of_philo)
         {
-            sem_post(&philo[max_id].info->waiter);
+            //sem_post(&philo[min_id].info->waiter);
             i = 0;
         }
     }

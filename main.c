@@ -48,11 +48,11 @@ int	main(int argc, char **argv)
 	i = 0;
 	while (i < info.num_of_philo)
 	{
-		if (sem_destroy(&info.fork[i]) != 0)
+		if (pthread_mutex_destroy(&info.fork[i]) != 0)
 			print_error("sem_destroy error\n");
 		i++;
 	}
-	sem_destroy(&info.waiter);
+	//sem_destroy(&info.waiter);
 	pthread_mutex_destroy(&info.print_mutex);
 	pthread_mutex_destroy(&info.eaten_mutex);
 	pthread_mutex_destroy(&info.done_mutex);
