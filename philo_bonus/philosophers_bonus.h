@@ -6,6 +6,7 @@
 # include <semaphore.h>
 # include <sys/time.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # define MAX_OF_PHILO 200
 
@@ -35,6 +36,7 @@ typedef struct s_philo
 	t_info	*info;
 	int		id;
 	int		num_of_times_eaten;
+	int		last_eat_times;
 }	t_philo;
 
 typedef struct s_info
@@ -60,9 +62,15 @@ void	info_init(t_info *info);
 void	handle_philosophers(t_info *info);
 void	handle_a_philosopher(t_info *info);
 int		get_time(void);
-void	take_fork(t_philo *philo);
-void	output_actions(t_philo *philo, t_action action);
+void	taking_fork(t_philo *philo);
+void	eating_spaghetti(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
+void	filter_and_output_actions(t_philo *philo, t_action action);
 void	skip_time(int time);
 char	*color(t_color color);
+void	routine(t_philo	*philo);
+void    routine(t_philo	*philo);
+bool	is_philo_dead(t_philo *philo);
 
 #endif

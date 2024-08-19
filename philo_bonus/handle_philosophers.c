@@ -1,14 +1,10 @@
 #include "philosophers_bonus.h"
 
-void    routine(t_philo	*philo)
+bool	is_philo_dead(t_philo *philo)
 {
-    while (!info->is_done)
-	{
-		take_fork(philo);
-		eat_spaghetti(philo);
-		sleeping(philo);
-		thinking(philo);
-	}
+	if (philo->info->time_to_die <= get_time() - philo->info->start_time - philo->last_eat_times)
+		return (true);
+	return (false);
 }
 
 void	handle_philosophers(t_info *info)
@@ -25,7 +21,7 @@ void	handle_philosophers(t_info *info)
 			print_error("failed to fork()");
         else if (pid == 0)
 		{
-			routine(info->philo[i]);
+			routine(&info->philo[i]);
 			exit(0);
 		}
         i++;
