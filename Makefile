@@ -1,8 +1,8 @@
 TARGET = philo
 
-SRCS = main.c handle_argm_error.c print_error.c action.c get_time.c\
-		handle_a_philosopher.c init_info.c handle_philosophers.c classify_by_actions.c\
-		color.c routine.c
+SRCS = main.c handle_argm_error.c print_error.c action.c time.c\
+		handle_a_philosopher.c info_init.c handle_philosophers.c classify_by_actions.c\
+		color.c routine.c mutex_destroy.c monitor_threads.c ft_atoi.c\
 
 OBJS = $(SRCS:.c=.o)
 

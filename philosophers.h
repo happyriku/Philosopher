@@ -26,8 +26,6 @@
 # define SUCESS 0
 # define FAILED 1
 
-// typedef struct s_player	t_player;
-
 typedef enum e_color
 {
 	RED,
@@ -76,14 +74,12 @@ typedef struct s_info
 	pthread_mutex_t	eaten_mutex;
 	pthread_mutex_t	done_mutex;
 	bool			is_done;
-	bool			is_even_eaten;
-
 }	t_info;
 
 int		main(int argc, char **argv);
 void	print_error(char *message);
 void	handle_argm_error(int argc, char **argv, t_info *info);
-void	init_info(t_info *info);
+void	info_init(t_info *info);
 void	handle_a_philosopher(t_info *info);
 int		get_time(void);
 void    classify_by_actions(t_player *philo, t_action action);
@@ -99,5 +95,7 @@ bool    check_is_died(t_player *philo);
 void    *routine(void *philosopher);
 void    *monitor(t_player *philo);
 void    check_must_eat_times(t_player *philo);
+void    mutex_destroy(t_info *info);
+int		ft_atoi(const char *str);
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "philosophers.h"
 
-void	init_player_info(t_player *philo, t_info *info, int num)
+void	player_info_init(t_player *philo, t_info *info, int num)
 {
 	philo->info = info;
 	philo->id = num + 1;
@@ -26,7 +26,7 @@ void	init_player_info(t_player *philo, t_info *info, int num)
 	philo->is_eaten = false;
 }
 
-void	init_mutex(t_info *info)
+void	mutex_init(t_info *info)
 {
 	int	i;
 
@@ -41,18 +41,17 @@ void	init_mutex(t_info *info)
 	}
 }
 
-void	init_info(t_info *info)
+void	info_init(t_info *info)
 {
 	int	i;
 
 	info->start_times = 0;
 	info->is_done = false;
-	info->is_even_eaten = false;
-	init_mutex(info);
+	mutex_init(info);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
-		init_player_info(&info->philo[i], info, i);
+		player_info_init(&info->philo[i], info, i);
 		i++;
 	}
 }

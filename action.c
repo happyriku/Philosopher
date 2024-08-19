@@ -27,7 +27,6 @@ void    eating_spaghetti(t_player *philo)
     skip_to_time(philo->info->time_to_eat, philo->info);
     pthread_mutex_unlock(&philo->info->fork[philo->right_fork]);
     pthread_mutex_unlock(&philo->info->fork[philo->left_fork]);
-    philo->info->is_even_eaten = true;
 }
 
 void    sleeping(t_player *philo)
