@@ -1,34 +1,5 @@
 #include "philosophers.h"
 
-// void    *thread_function(void   *arg)
-// {
-//     t_player *player;
-
-//     player = (t_player *)arg;
-//     while (1)
-//     {
-//         printf("------------\n");
-//         pthread_mutex_lock(&player->mutex);
-//         while (player->fork_total_num <= 0)
-//         {
-//             pthread_mutex_unlock(&player->mutex);
-//             sleep(1);
-//             pthread_mutex_lock(&player->mutex);
-//         }
-//         player->has_fork += 1;
-//         player->fork_total_num -= 1;
-//         printf("Player %d has fork: %d\n", player->thread_id, player->has_fork);
-//         pthread_mutex_unlock(&player->mutex);
-//         sleep(2);
-//         pthread_mutex_lock(&player->mutex);
-//         player->has_fork -= 1;
-//         player->fork_total_num += 1;
-//         pthread_mutex_unlock(&player->mutex);
-//         printf("Thread %d is done\n", player->thread_id);
-//         return (NULL);
-//     }
-// }
-
 int	main(int argc, char **argv)
 {
 	pthread_t	*threads;
@@ -49,10 +20,9 @@ int	main(int argc, char **argv)
 	while (i < info.num_of_philo)
 	{
 		if (pthread_mutex_destroy(&info.fork[i]) != 0)
-			print_error("sem_destroy error\n");
+			print_error("pthread_mutex error\n");
 		i++;
 	}
-	//sem_destroy(&info.waiter);
 	pthread_mutex_destroy(&info.print_mutex);
 	pthread_mutex_destroy(&info.eaten_mutex);
 	pthread_mutex_destroy(&info.done_mutex);

@@ -33,7 +33,6 @@ void	init_mutex(t_info *info)
 	pthread_mutex_init(&info->print_mutex, NULL);
 	pthread_mutex_init(&info->eaten_mutex, NULL);
 	pthread_mutex_init(&info->done_mutex, NULL);
-	//sem_init(&info->waiter, 0, 0);
 	i = 0;
 	while (i < info->num_of_philo)
 	{
@@ -48,6 +47,7 @@ void	init_info(t_info *info)
 
 	info->start_times = 0;
 	info->is_done = false;
+	info->is_even_eaten = false;
 	init_mutex(info);
 	i = 0;
 	while (i < info->num_of_philo)

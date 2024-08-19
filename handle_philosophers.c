@@ -10,29 +10,18 @@ bool    check_is_died(t_player *philo)
     return (false);
 }
 
-void    *prioritizing_philo(t_player *philo)
+void    *monitor(t_player *philo)
 {
-    int min;
-    int min_id;
     int i;
 
-    min = 1;
     i = 0;
     while (!philo->info->is_done)
     {
         if (check_is_died(&philo[i]))
             break ;
-        // if (min > philo[i].eat_count)
-        // {
-        //     min = philo[i].eat_count;
-        //     min_id = i;
-        // }
         i++;
         if (i == philo->info->num_of_philo)
-        {
-            //sem_post(&philo[min_id].info->waiter);
             i = 0;
-        }
     }
     return (NULL);
 }
@@ -48,8 +37,8 @@ void    handle_philosophers(t_info *info)
         pthread_create(&info->philo[i].thread, NULL, (void *)routine, &info->philo[i]);
         i++;
     }
-    pthread_create(&info->philo->prioritize_thread, NULL, (void *)prioritizing_philo, info->philo);
-    pthread_join(info->philo->prioritize_thread, NULL);
+    pthread_create(&info->philo->monitor_thread, NULL, (void *)monitor, info->philo);
+    pthread_join(info->philo->monitor_thread, NULL);
     i = 0;
 	while (i < info->num_of_philo)
 	{

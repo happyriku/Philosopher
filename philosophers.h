@@ -57,7 +57,6 @@ typedef struct s_player
 	t_info			*info;
 	pthread_t		thread;
 	pthread_t		monitor_thread;
-	pthread_t		prioritize_thread;
 	int				last_eat_time;
 	int				eat_count;
 	bool			is_eaten;
@@ -77,8 +76,7 @@ typedef struct s_info
 	pthread_mutex_t	eaten_mutex;
 	pthread_mutex_t	done_mutex;
 	bool			is_done;
-	//sem_t			fork[MAX_OF_PHILO];
-	sem_t			waiter;
+	bool			is_even_eaten;
 
 }	t_info;
 
@@ -99,7 +97,7 @@ void    handle_philosophers(t_info *info);
 char	*color(t_color color);
 bool    check_is_died(t_player *philo);
 void    *routine(void *philosopher);
-void    *prioritizing_philo(t_player *philo);
+void    *monitor(t_player *philo);
 void    check_must_eat_times(t_player *philo);
 
 #endif
