@@ -10,3 +10,14 @@ int	get_time(void)
 	time = tv.tv_sec * 1000 + tv.tv_usec / 1000;
 	return (time);
 }
+
+void	skip_time(int time)
+{
+	int start_time;
+
+	start_time = get_time();
+	while (time >= get_time() - start_time)
+	{
+		usleep(100);
+	}
+}

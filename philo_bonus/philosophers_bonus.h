@@ -11,7 +11,7 @@
 
 typedef struct s_info	t_info;
 
-typedef enum action
+typedef enum s_action
 {
 	TAKING,
 	EATING,
@@ -19,6 +19,16 @@ typedef enum action
 	THINKING,
 	DIE,
 }	t_action;
+
+typedef enum s_color
+{
+	RED,
+	GREEN,
+	BLUE,
+	YELLOW,
+	STOP,
+	
+}	t_color;
 
 typedef struct s_philo
 {
@@ -51,5 +61,6 @@ void	handle_a_philosopher(t_info *info);
 int		get_time(void);
 void	take_fork(t_philo *philo);
 void	output_actions(t_philo *philo, t_action action);
+void	skip_time(int time);
 
 #endif
