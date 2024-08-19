@@ -48,6 +48,7 @@ typedef struct s_info
 	t_philo	philo[MAX_OF_PHILO];
 	sem_t	*waiter;
 	sem_t	fork;
+	bool	is_done;
 
 }	t_info;
 
@@ -62,5 +63,6 @@ int		get_time(void);
 void	take_fork(t_philo *philo);
 void	output_actions(t_philo *philo, t_action action);
 void	skip_time(int time);
+char	*color(t_color color);
 
 #endif

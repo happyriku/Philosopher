@@ -17,6 +17,7 @@ void	info_init(t_info *info)
 {
 	int	i;
 
+	info->is_done = false;
 	i = 0;
 	while (i < info->num_of_philo)
 	{
