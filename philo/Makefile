@@ -7,7 +7,7 @@ SRCS = main.c handle_argm_error.c print_error.c action.c time.c\
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-CFLAGS = -g -O0
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(TARGET)
 

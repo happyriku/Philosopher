@@ -2,11 +2,7 @@
 
 int	main(int argc, char **argv)
 {
-	pthread_t	*threads;
-	t_player	*players;
-	int			i;
 	t_info		info;
-	int			num_threads;
 
 	if (!(argc == 5 || argc == 6))
 		print_error("The number of arguments is different !");
