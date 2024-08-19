@@ -1,7 +1,8 @@
 #include "philosophers_bonus.h"
 
-void	philo_info_init(t_philo	*philo, int num)
+void	philo_info_init(t_philo	*philo, t_info *info, int num)
 {
+	philo->info = info;
 	philo->num_of_times_eaten = 0;
 	philo->id = num + 1;
 }
@@ -19,7 +20,7 @@ void	info_init(t_info *info)
 	i = 0;
 	while (i < info->num_of_philo)
 	{
-		philo_info_init(&info->philo[i], i);
+		philo_info_init(&info->philo[i], info, i);
 		i++;
 	}
 	semaphore_init(info);
