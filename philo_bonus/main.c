@@ -12,4 +12,6 @@ int	main(int argc, char	**argv)
 		handle_a_philosopher(&info);
 	else
 		handle_philosophers(&info);
+	mutex_destroy(&info);
+	return (0);
 }

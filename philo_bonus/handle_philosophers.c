@@ -1,24 +1,32 @@
 #include "philosophers_bonus.h"
 
-bool	is_philo_dead(t_philo *philo)
+void	waiter(t_philo	*philo)
 {
-	if (philo->info->time_to_die <= get_time() - philo->info->start_time - philo->last_eat_times)
-	{
-		pthread_mutex_lock(&philo->info->shared_mutex);
-		philo->info->is_done = true;
-		pthread_mutex_unlock(&philo->info->shared_mutex);
-		return (true);
-	}
-	return (false);
+	if (philo->id % 2 != 0)
+		skip_time(100, philo->info);
+	sem_post(&philo->info->waiter);
 }
 
-// void	waiter(t_philo	*philo)
-// {
-// 	if (philo->id % 2 != 0)
-// 		skip_time(100);
-// 	sem_post(&philo->info->waiter);
-// 	exit(0);
-// }
+void	mutex_destroy(t_info *info)
+{
+	pthread_mutex_destroy(&info->print_mutex);
+	pthread_mutex_destroy(&info->shared_mutex);
+}
+
+void	grim_reaper(t_info *info)
+{
+	int	i;
+
+	i = 0;
+	while (!info->is_done)
+	{
+		if (is_philo_dead(&info->philo[i]))
+			break ;
+		if (i == info->num_of_philo)
+			i = 0;
+		i++;
+	}
+}
 
 void	handle_philosophers(t_info *info)
 {
@@ -32,12 +40,14 @@ void	handle_philosophers(t_info *info)
 		if (pid == -1)
 			print_error("failed to fork()");
         else if (pid > 0)
+			info->pids[i] = pid;
+		else if (pid == 0)
 		{
+			waiter(&info->philo[i]);
 			routine(&info->philo[i]);
 			kill(pid, SIGKILL);
 		}
-		// else if (pid == 0)
-		// 	waiter(&info->philo[i]);
         i++;
     }
+	grim_reaper(info);
 }

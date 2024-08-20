@@ -51,7 +51,9 @@ typedef struct s_info
 	int				num_of_times_must_eat;
 	int				start_time;
 	t_philo			philo[MAX_OF_PHILO];
+	pid_t			pids[MAX_OF_PHILO];
 	pthread_mutex_t	shared_mutex;
+	pthread_mutex_t	print_mutex;
 	sem_t			waiter;
 	sem_t			fork;
 	bool			is_done;
@@ -71,10 +73,11 @@ void	eating_spaghetti(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
 void	filter_and_output_actions(t_philo *philo, t_action action);
-void	skip_time(int time);
+void	skip_time(int time, t_info *info);
 char	*color(t_color color);
 void	routine(t_philo	*philo);
 void    routine(t_philo	*philo);
 bool	is_philo_dead(t_philo *philo);
+void	mutex_destroy(t_info *info);
 
 #endif

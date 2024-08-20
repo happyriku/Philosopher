@@ -19,6 +19,7 @@ void	info_init(t_info *info)
 
 	info->is_done = false;
 	pthread_mutex_init(&info->shared_mutex, NULL);
+	pthread_mutex_init(&info->print_mutex, NULL);
 	i = 0;
 	while (i < info->num_of_philo)
 	{

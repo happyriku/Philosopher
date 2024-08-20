@@ -11,13 +11,15 @@ int	get_time(void)
 	return (time);
 }
 
-void	skip_time(int time)
+void	skip_time(int time, t_info *info)
 {
 	int start_time;
 
 	start_time = get_time();
 	while (time >= get_time() - start_time)
 	{
+		if (info->is_done)
+			break ;
 		usleep(100);
 	}
 }
