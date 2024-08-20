@@ -18,6 +18,8 @@ void	grim_reaper(t_info *info)
 	int	i;
 
 	i = 0;
+	while (info->start_time == 0)
+		usleep(100);
 	while (!info->is_done)
 	{
 		if (is_philo_dead(&info->philo[i]))
@@ -45,7 +47,7 @@ void	handle_philosophers(t_info *info)
 		{
 			waiter(&info->philo[i]);
 			routine(&info->philo[i]);
-			kill(pid, SIGKILL);
+			kill(info->pids[i], SIGKILL);
 		}
         i++;
     }

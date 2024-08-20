@@ -5,6 +5,7 @@ void	philo_info_init(t_philo	*philo, t_info *info, int num)
 	philo->info = info;
 	philo->num_of_times_eaten = 0;
 	philo->id = num + 1;
+	philo->last_eat_times = 0;
 }
 
 void	semaphore_init(t_info *info)

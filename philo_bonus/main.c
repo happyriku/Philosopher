@@ -3,6 +3,7 @@
 int	main(int argc, char	**argv)
 {
 	t_info	info;
+	int		i;
 
 	if (!(argc == 5 || argc == 6))
 		print_error("The arguments are different");
@@ -13,5 +14,6 @@ int	main(int argc, char	**argv)
 	else
 		handle_philosophers(&info);
 	mutex_destroy(&info);
+	i = 0;
 	return (0);
 }
