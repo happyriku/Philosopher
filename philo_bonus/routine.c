@@ -2,6 +2,7 @@
 
 void    routine(t_philo	*philo)
 {
+	philo->info->start_time = get_time();
     while (!philo->info->is_done)
 	{
 		if (is_philo_dead(philo))

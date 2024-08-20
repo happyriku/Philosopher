@@ -10,6 +10,8 @@ char	*color(t_color color)
 		return ("\x1b[34m");
 	if (color == YELLOW)
 		return ("\x1b[33m");
+	if (color == BOLD)
+		return ("\e[37m");
 	if (color == STOP)
 		return ("\x1b[39m");
 }

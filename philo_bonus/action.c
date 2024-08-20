@@ -2,7 +2,7 @@
 
 void	taking_fork(t_philo *philo)
 {
-
+	// sem_wait(&philo->info->waiter);
 	sem_wait(&philo->info->fork);
 	filter_and_output_actions(philo, TAKING);
 	if (sem_wait(&philo->info->fork) == -1)
@@ -17,6 +17,7 @@ void	eating_spaghetti(t_philo *philo)
 	skip_time(philo->info->time_to_eat);
 	sem_post(&philo->info->fork);
 	sem_post(&philo->info->fork);
+	// sem_post(&philo->info->waiter);
 }
 
 void	sleeping(t_philo *philo)

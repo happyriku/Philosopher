@@ -7,6 +7,8 @@
 # include <sys/time.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <pthread.h>
+# include <signal.h>
 
 # define MAX_OF_PHILO 200
 
@@ -27,6 +29,7 @@ typedef enum s_color
 	GREEN,
 	BLUE,
 	YELLOW,
+	BOLD,
 	STOP,
 	
 }	t_color;
@@ -41,16 +44,17 @@ typedef struct s_philo
 
 typedef struct s_info
 {
-	int		num_of_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		num_of_times_must_eat;
-	int		start_time;
-	t_philo	philo[MAX_OF_PHILO];
-	sem_t	*waiter;
-	sem_t	fork;
-	bool	is_done;
+	int				num_of_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				num_of_times_must_eat;
+	int				start_time;
+	t_philo			philo[MAX_OF_PHILO];
+	pthread_mutex_t	shared_mutex;
+	sem_t			waiter;
+	sem_t			fork;
+	bool			is_done;
 
 }	t_info;
 

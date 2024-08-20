@@ -6,13 +6,13 @@ void	output_actions(t_philo *philo, t_action action)
 
 	elapsed_time = get_time() - philo->info->start_time;
 	if (action == TAKING)
-		printf("%d %d has taken a fork\n", elapsed_time, philo->id);
+		printf("%s%d %d has taken a fork%s\n", color(GREEN), elapsed_time, philo->id, color(STOP));
 	else if (action == EATING)
-		printf("%d %d is eating\n", elapsed_time, philo->id);
+		printf("%s%d %d is eating%s\n", color(YELLOW), elapsed_time, philo->id, color(STOP));
 	else if (action == SLEEPING)
-		printf("%d %d is sleeping\n", elapsed_time, philo->id);
+		printf("%s%d %d is sleeping%s\n", color(BLUE), elapsed_time, philo->id, color(BLUE));
 	else if (action == THINKING)
-		printf("%d %d is thinking\n", elapsed_time, philo->id);
+		printf("%s%d %d is thinking%s\n", color(BOLD), elapsed_time, philo->id, color(STOP));
 }
 
 void	filter_and_output_actions(t_philo *philo, t_action action)
