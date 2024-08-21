@@ -12,7 +12,7 @@ void	semaphore_init(t_info *info)
 {
 	sem_init(&info->waiter, 1, 0);
 	sem_init(&info->fork, 1, info->num_of_philo);
-	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 1);
+	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 0);
 	info->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 }
 

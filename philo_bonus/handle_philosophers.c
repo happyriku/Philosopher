@@ -11,9 +11,9 @@ void	grim_reaper(t_info *info)
 {
 	int	i;
 
-	i = 0;
 	while (info->start_time == 0)
 		usleep(100);
+	i = 0;
 	while (1)
 	{
 		if (is_philo_dead(&info->philo[i]))
