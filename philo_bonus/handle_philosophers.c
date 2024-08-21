@@ -7,28 +7,22 @@ void	waiter(t_philo	*philo)
 	sem_post(&philo->info->waiter);
 }
 
-void	mutex_destroy(t_info *info)
-{
-	pthread_mutex_destroy(&info->print_mutex);
-	pthread_mutex_destroy(&info->shared_mutex);
-}
+// void	grim_reaper(t_info *info)
+// {
+// 	int	i;
 
-void	grim_reaper(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	while (info->start_time == 0)
-		usleep(100);
-	while (!info->is_done)
-	{
-		if (is_philo_dead(&info->philo[i]))
-			break ;
-		if (i == info->num_of_philo)
-			i = 0;
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (info->start_time == 0)
+// 		usleep(100);
+// 	while (!info->is_done)
+// 	{
+// 		if (is_philo_dead(&info->philo[i]))
+// 			break ;
+// 		if (i == info->num_of_philo)
+// 			i = 0;
+// 		i++;
+// 	}
+// }
 
 void	handle_philosophers(t_info *info)
 {
@@ -51,5 +45,5 @@ void	handle_philosophers(t_info *info)
 		}
         i++;
     }
-	grim_reaper(info);
+	//grim_reaper(info);
 }

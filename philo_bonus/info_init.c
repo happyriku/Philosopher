@@ -12,15 +12,14 @@ void	semaphore_init(t_info *info)
 {
 	sem_init(&info->waiter, 1, 0);
 	sem_init(&info->fork, 1, info->num_of_philo);
+	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 1);
+	info->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 }
 
 void	info_init(t_info *info)
 {
 	int	i;
 
-	info->is_done = false;
-	pthread_mutex_init(&info->shared_mutex, NULL);
-	pthread_mutex_init(&info->print_mutex, NULL);
 	i = 0;
 	while (i < info->num_of_philo)
 	{

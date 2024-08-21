@@ -19,16 +19,13 @@ void	filter_and_output_actions(t_philo *philo, t_action action)
 {
 	int elapsed_time;
 
-	pthread_mutex_lock(&philo->info->print_mutex);
+	sem_wait(philo->info->sem_print);
 	if (action == DIE)
 	{
 		elapsed_time = get_time() - philo->info->start_time;
 		printf("%s%d %d died%s\n", color(RED), elapsed_time, philo->id, color(STOP));
-		pthread_mutex_lock(&philo->info->shared_mutex);
-		philo->info->is_done = true;
-		pthread_mutex_unlock(&philo->info->shared_mutex);	
 	}
 	else
 		output_actions(philo, action);
-	pthread_mutex_unlock(&philo->info->print_mutex);
+	sem_post(philo->info->sem_print);
 }

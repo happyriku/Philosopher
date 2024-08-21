@@ -9,6 +9,7 @@
 # include <stdbool.h>
 # include <pthread.h>
 # include <signal.h>
+# include <fcntl.h>
 
 # define MAX_OF_PHILO 200
 
@@ -52,11 +53,10 @@ typedef struct s_info
 	int				start_time;
 	t_philo			philo[MAX_OF_PHILO];
 	pid_t			pids[MAX_OF_PHILO];
-	pthread_mutex_t	shared_mutex;
-	pthread_mutex_t	print_mutex;
 	sem_t			waiter;
 	sem_t			fork;
-	bool			is_done;
+	sem_t			*sem_done;
+	sem_t			*sem_print;
 
 }	t_info;
 
