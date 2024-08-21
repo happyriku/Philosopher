@@ -6,15 +6,15 @@ SRCS = action.c ft_atoi.c handle_a_philosopher.c handle_philosophers.c handle_ar
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
-# CFLAGS =
+CFLAGS = -fsanitize=address
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 .c.o:
-	$(CC) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
