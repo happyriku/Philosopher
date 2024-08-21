@@ -17,8 +17,6 @@ void    routine(t_philo	*philo)
 	philo->info->start_time = get_time();
     while (1)
 	{
-		if (is_philo_dead(philo))
-			break ;
 		taking_fork(philo);
 		eating_spaghetti(philo);
 		sleeping(philo);
