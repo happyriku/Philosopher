@@ -73,11 +73,9 @@ void	eating_spaghetti(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
 void	filter_and_output_actions(t_philo *philo, t_action action);
-void	skip_time(int time, t_info *info);
+void	skip_time(int time);
 char	*color(t_color color);
 void	routine(t_philo	*philo);
-void    routine(t_philo	*philo);
 bool	is_philo_dead(t_philo *philo);
-void	mutex_destroy(t_info *info);
 
 #endif

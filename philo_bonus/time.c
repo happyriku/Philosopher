@@ -11,7 +11,7 @@ int	get_time(void)
 	return (time);
 }
 
-void	skip_time(int time, t_info *info)
+void	skip_time(int time)
 {
 	int start_time;
 

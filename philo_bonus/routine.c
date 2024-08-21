@@ -14,7 +14,6 @@ bool	is_philo_dead(t_philo *philo)
 
 void    routine(t_philo	*philo)
 {
-	philo->info->start_time = get_time();
     while (1)
 	{
 		taking_fork(philo);

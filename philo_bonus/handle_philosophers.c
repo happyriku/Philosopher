@@ -3,13 +3,14 @@
 void	waiter(t_philo	*philo)
 {
 	if (philo->id % 2 != 0)
-		skip_time(100, philo->info);
+		skip_time(100);
 	sem_post(&philo->info->waiter);
 }
 
 void	grim_reaper(t_info *info)
 {
 	int	i;
+	static int count = 0;
 
 	i = 0;
 	while (info->start_time == 0)
@@ -21,11 +22,15 @@ void	grim_reaper(t_info *info)
 		if (i == info->num_of_philo)
 			i = 0;
 		i++;
+		// printf("%d\n", count);
+		// count++;
+		// if (count == 1000)
+		// 	break ;
 	}
 	i = -1;
 	while (++i < info->num_of_philo)
 	{
-		printf("pid : %d\n", info->pids[i]);
+		printf("---%d : %d\n", i, info->pids[i]);
 		kill(info->pids[i], SIGKILL);
 	}
 }

@@ -17,6 +17,7 @@ int	main(int argc, char	**argv)
 		print_error("The arguments are different");
 	handle_args_error(argc, argv, &info);
 	info_init(&info);
+	info.start_time = get_time();
 	if (info.num_of_philo == 1)
 		handle_a_philosopher(&info);
 	else
