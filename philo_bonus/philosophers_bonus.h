@@ -39,10 +39,11 @@ typedef enum s_color
 
 typedef struct s_philo
 {
-	t_info	*info;
-	int		id;
-	int		num_of_times_eaten;
-	int		last_eat_times;
+	t_info		*info;
+	int			id;
+	int			num_of_times_eaten;
+	int			last_eat_times;
+	pthread_t	thread;
 }	t_philo;
 
 typedef struct s_info

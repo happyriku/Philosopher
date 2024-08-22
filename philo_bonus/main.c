@@ -7,6 +7,12 @@ void	cleanup_semaphore(t_info *info)
 	sem_unlink("/sem_done");
 	sem_unlink("/sem_print");
 	pthread_join(info->reaper_thread, NULL);
+	int i = 0;
+	while (i < info->num_of_philo)
+	{
+		pthread_join(info->philo[i].thread, NULL);
+		i++;
+	}
 }
 
 bool	has_simulation_stop(t_info *info)
@@ -25,7 +31,6 @@ int	kill_all_philosophers_if_one_died(t_info *info, pid_t pid)
 	int status;
 	int res;
 
-	printf("pid : %d\n", pid);
 	while (pid && waitpid(pid, &status, WNOHANG) != 0)
 	{
 		i = -1;
@@ -33,7 +38,7 @@ int	kill_all_philosophers_if_one_died(t_info *info, pid_t pid)
 			kill(info->pids[i], SIGKILL);
 		return (0);
 	}
-	sleep(5);
+	usleep(1000);
 	return (1);
 }
 
