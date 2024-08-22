@@ -14,6 +14,9 @@ void	eating_spaghetti(t_philo *philo)
 {
 	filter_and_output_actions(philo, EATING);
 	philo->last_eat_times = get_time() - philo->info->start_time;
+	printf("----------\n");
+	if (is_philo_dead(philo))
+		return ;
 	skip_time(philo->info->time_to_eat);
 	sem_post(&philo->info->fork);
 	sem_post(&philo->info->fork);

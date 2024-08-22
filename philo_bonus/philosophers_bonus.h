@@ -10,6 +10,8 @@
 # include <pthread.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <sys/types.h>
+# include <sys/wait.h>
 
 # define MAX_OF_PHILO 200
 
@@ -57,6 +59,9 @@ typedef struct s_info
 	sem_t			fork;
 	sem_t			*sem_done;
 	sem_t			*sem_print;
+	sem_t			*sem_stop;
+	pthread_t		reaper_thread;
+	bool			stop_sim;
 
 }	t_info;
 

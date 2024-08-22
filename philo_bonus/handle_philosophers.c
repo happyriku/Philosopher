@@ -7,21 +7,16 @@ void	waiter(t_philo	*philo)
 	sem_post(&philo->info->waiter);
 }
 
-void	grim_reaper(t_info *info)
+void	*grim_reaper(void	*arg)
 {
 	int	i;
+	t_info	*info;
 
+	info = (t_info *)arg;
 	while (info->start_time == 0)
 		usleep(100);
-	i = 0;
-	while (1)
-	{
-		if (is_philo_dead(&info->philo[i]))
-			break ;
-		i++;
-		if (i == info->num_of_philo)
-			i = 0;
-	}
+	sem_wait(info->sem_done);
+	info->stop_sim = true;
 	i = -1;
 	while (++i < info->num_of_philo)
 		kill(info->pids[i], SIGKILL);
@@ -47,5 +42,5 @@ void	handle_philosophers(t_info *info)
 		}
         i++;
     }
-	grim_reaper(info);
+	pthread_create(&info->reaper_thread, NULL, grim_reaper, (void	*)info);
 }
