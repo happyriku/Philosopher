@@ -18,6 +18,7 @@ void	*grim_reaper(void	*arg)
 		usleep(100);
 	sem_wait(info->sem_done);
 	info->stop_sim = true;
+	sem_post(info->sem_dead);
 	i = -1;
 	while (++i < info->num_of_philo)
 		kill(info->pids[i], SIGKILL);

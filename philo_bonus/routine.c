@@ -21,8 +21,10 @@ void	*individual_grim_reaper(void	*arg)
 	{
 		if (philo->info->time_to_die <= get_time() - philo->info->start_time - philo->last_eat_times)
 		{
+			sem_wait(philo->info->sem_dead);
 			filter_and_output_actions(philo, DIE);
 			sem_post(philo->info->sem_done);
+			// sem_post(philo->info->sem_dead);
 			break ;
 		}
 		usleep(100);
