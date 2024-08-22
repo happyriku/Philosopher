@@ -4,7 +4,6 @@ void	taking_fork(t_philo *philo)
 {
 	int value;
 
-	printf("philo id : %d\n", philo->id);
 	sem_wait(philo->info->sem_waiter);
 	sem_wait(philo->info->sem_fork);
 	filter_and_output_actions(philo, TAKING);

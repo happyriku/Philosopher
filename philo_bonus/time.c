@@ -16,10 +16,6 @@ void	skip_time(int time)
 	int start_time;
 
 	start_time = get_time();
-	printf("time : %d\n", time);
 	while (time >= get_time() - start_time)
-	{
-		printf("elaped time : %d\n", get_time() - start_time);
 		usleep(100);
-	}
 }

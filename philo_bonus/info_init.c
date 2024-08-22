@@ -17,7 +17,7 @@ void	semaphore_init(t_info *info)
 	sem_unlink("/sem_fork");
 	info->sem_fork = sem_open("/sem_fork", O_CREAT, 0644, info->num_of_philo);
 	info->sem_waiter = sem_open("/sem_waiter", O_CREAT, 0644, 0);
-	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 1);
+	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 0);
 	info->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
 	info->sem_stop = sem_open("/sem_stop", O_CREAT, 0644, 1);
 }
