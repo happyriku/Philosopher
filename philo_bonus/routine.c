@@ -25,6 +25,7 @@ void	*individual_grim_reaper(void	*arg)
 			sem_post(philo->info->sem_done);
 			break ;
 		}
+		usleep(100);
 	}
 }
 
