@@ -4,15 +4,18 @@ void	cleanup_semaphore(t_info *info)
 {
 	sem_close(info->sem_done);
 	sem_close(info->sem_print);
+	sem_close(info->sem_waiter);
+	sem_close(info->sem_fork);
+	sem_close(info->sem_stop);
 	sem_unlink("/sem_done");
 	sem_unlink("/sem_print");
+	sem_unlink("/sem_waiter");
+	sem_unlink("/sem_fork");
+	sem_unlink("/sem_stop");
 	pthread_join(info->reaper_thread, NULL);
-	int i = 0;
-	while (i < info->num_of_philo)
-	{
+	int i = -1;
+	while (++i < info->num_of_philo)
 		pthread_join(info->philo[i].thread, NULL);
-		i++;
-	}
 }
 
 bool	has_simulation_stop(t_info *info)

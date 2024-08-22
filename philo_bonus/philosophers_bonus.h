@@ -61,6 +61,8 @@ typedef struct s_info
 	sem_t			*sem_done;
 	sem_t			*sem_print;
 	sem_t			*sem_stop;
+	sem_t			*sem_waiter;
+	sem_t			*sem_fork;
 	pthread_t		reaper_thread;
 	bool			stop_sim;
 

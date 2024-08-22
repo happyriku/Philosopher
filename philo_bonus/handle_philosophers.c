@@ -2,9 +2,10 @@
 
 void	waiter(t_philo	*philo)
 {
-	if (philo->id % 2 != 0)
-		skip_time(100);
-	sem_post(&philo->info->waiter);
+	if (philo->id % 2 == 0)
+		sem_post(philo->info->sem_waiter);
+	else
+		usleep(1000);
 }
 
 void	*grim_reaper(void	*arg)

@@ -2,11 +2,13 @@
 
 void	taking_fork(t_philo *philo)
 {
-	sem_wait(&philo->info->waiter);
-	sem_wait(&philo->info->fork);
+	int value;
+
+	printf("philo id : %d\n", philo->id);
+	sem_wait(philo->info->sem_waiter);
+	sem_wait(philo->info->sem_fork);
 	filter_and_output_actions(philo, TAKING);
-	if (sem_wait(&philo->info->fork) == -1)
-		return ;
+	sem_wait(philo->info->sem_fork);
 	filter_and_output_actions(philo, TAKING);
 }
 
@@ -14,12 +16,10 @@ void	eating_spaghetti(t_philo *philo)
 {
 	filter_and_output_actions(philo, EATING);
 	philo->last_eat_times = get_time() - philo->info->start_time;
-	if (is_philo_dead(philo))
-		return ;
 	skip_time(philo->info->time_to_eat);
-	sem_post(&philo->info->fork);
-	sem_post(&philo->info->fork);
-	sem_post(&philo->info->waiter);
+	sem_post(philo->info->sem_fork);
+	sem_post(philo->info->sem_fork);
+	sem_post(philo->info->sem_waiter);
 }
 
 void	sleeping(t_philo *philo)
