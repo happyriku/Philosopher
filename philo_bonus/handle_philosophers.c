@@ -1,12 +1,12 @@
 #include "philosophers_bonus.h"
 
-void	waiter(t_philo	*philo)
-{
-	if (philo->id % 2 == 0)
-		sem_post(philo->info->sem_waiter);
-	else
-		usleep(1000);
-}
+// void	waiter(t_philo	*philo)
+// {
+// 	if (philo->id % 2 == 0)
+// 		sem_post(philo->info->sem_waiter);
+// 	else
+// 		skip_time(100);
+// }
 
 void	*grim_reaper(void	*arg)
 {
@@ -38,7 +38,7 @@ void	handle_philosophers(t_info *info)
 			info->pids[i] = pid;
 		else if (pid == 0)
 		{
-			waiter(&info->philo[i]);
+			//waiter(&info->philo[i]);
 			routine(&info->philo[i]);
 		}
         i++;

@@ -1,18 +1,29 @@
-TARGET = philo
+NAME = philo
 
-SRCS = main.c handle_argm_error.c print_error.c action.c time.c\
-		handle_a_philosopher.c info_init.c handle_philosophers.c classify_by_actions.c\
-		color.c routine.c mutex_destroy.c monitor_threads.c ft_atoi.c\
+SRCS = srcs/main.c \
+		srcs/handle_argm_error.c \
+		srcs/print_error.c \
+		srcs/action.c \
+		srcs/time.c \
+		srcs/handle_a_philosopher.c \
+		srcs/info_init.c \
+		srcs/handle_philosophers.c \
+		srcs/classify_by_actions.c \
+		srcs/color.c \
+		srcs/routine.c \
+		srcs/mutex_destroy.c \
+		srcs/monitor_threads.c \
+		srcs/ft_atoi.c \
 
 OBJS = $(SRCS:.c=.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(TARGET)
+all: $(NAME)
 
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(TARGET)
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -21,7 +32,7 @@ clean:
 	rm -rf $(OBJS)
 
 fclean: clean
-	rm -rf $(TARGET)
+	rm -rf $(NAME)
 
 re: fclean all
 

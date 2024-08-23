@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 void    check_must_eat_times(t_player *philo)
 {

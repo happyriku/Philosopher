@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 void    output_action(t_player *philo, t_action action)
 {

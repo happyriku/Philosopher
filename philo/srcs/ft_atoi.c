@@ -1,4 +1,4 @@
-#include "philosophers.h"
+#include "../include/philosophers.h"
 
 static void	rm_isspace(const char *str, int *i)
 {
