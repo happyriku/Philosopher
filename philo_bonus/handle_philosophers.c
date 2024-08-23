@@ -1,14 +1,6 @@
 #include "philosophers_bonus.h"
 
-// void	waiter(t_philo	*philo)
-// {
-// 	if (philo->id % 2 == 0)
-// 		sem_post(philo->info->sem_waiter);
-// 	else
-// 		skip_time(100);
-// }
-
-void	*grim_reaper(void	*arg)
+void	*famine_reaper(void	*arg)
 {
 	int	i;
 	t_info	*info;
@@ -18,6 +10,20 @@ void	*grim_reaper(void	*arg)
 		usleep(100);
 	sem_wait(info->sem_done);
 	info->stop_sim = true;
+	i = -1;
+	while (++i < info->num_of_philo)
+		kill(info->pids[i], SIGKILL);
+}
+
+void	*gluttony_reaper(void *arg)
+{
+	t_info *info;
+	int		i;
+
+	info = (t_info *)arg;
+	i = -1;
+	while (++i < info->num_of_philo)
+		sem_wait(info->sem_philo);
 	i = -1;
 	while (++i < info->num_of_philo)
 		kill(info->pids[i], SIGKILL);
@@ -37,11 +43,9 @@ void	handle_philosophers(t_info *info)
         else if (pid > 0)
 			info->pids[i] = pid;
 		else if (pid == 0)
-		{
-			//waiter(&info->philo[i]);
 			routine(&info->philo[i]);
-		}
         i++;
     }
-	pthread_create(&info->reaper_thread, NULL, grim_reaper, (void	*)info);
+	pthread_create(&info->famine_reaper_thread, NULL, famine_reaper, (void	*)info);
+	pthread_create(&info->gluttony_reaper_thread, NULL, gluttony_reaper, (void *)info);
 }

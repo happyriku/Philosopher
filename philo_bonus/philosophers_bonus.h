@@ -43,6 +43,8 @@ typedef struct s_philo
 	int			id;
 	int			num_of_times_eaten;
 	int			last_eat_times;
+	int			num_of_meals;
+	bool		is_eaten;
 	pthread_t	thread;
 }	t_philo;
 
@@ -52,7 +54,7 @@ typedef struct s_info
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	int				num_of_times_must_eat;
+	int				num_of_times_philo_must_eat;
 	int				start_time;
 	t_philo			philo[MAX_OF_PHILO];
 	pid_t			pids[MAX_OF_PHILO];
@@ -61,10 +63,11 @@ typedef struct s_info
 	sem_t			*sem_done;
 	sem_t			*sem_print;
 	sem_t			*sem_stop;
-	//sem_t			*sem_waiter;
+	sem_t			*sem_philo;
 	sem_t			*sem_fork;
 	sem_t			*sem_dead;
-	pthread_t		reaper_thread;
+	pthread_t		famine_reaper_thread;
+	pthread_t		gluttony_reaper_thread;
 	bool			stop_sim;
 
 }	t_info;

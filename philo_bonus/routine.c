@@ -26,6 +26,11 @@ void	*individual_grim_reaper(void	*arg)
 			sem_post(philo->info->sem_done);
 			break ;
 		}
+		if (philo->num_of_meals == philo->info->num_of_times_philo_must_eat && philo->is_eaten)
+		{
+			sem_post(philo->info->sem_philo);
+			philo->is_eaten = false;
+		}
 		usleep(100);
 	}
 }
