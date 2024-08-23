@@ -33,11 +33,13 @@ void	*individual_grim_reaper(void	*arg)
 void    routine(t_philo	*philo)
 {
 	pthread_create(&philo->thread, NULL, individual_grim_reaper, (void	*)philo);
+	if (philo->id % 2 != 0)
+		thinking(philo, true);
     while (1)
 	{
 		taking_fork(philo);
 		eating_spaghetti(philo);
 		sleeping(philo);
-		thinking(philo);
+		thinking(philo, false);
 	}
 }

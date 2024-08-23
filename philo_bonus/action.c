@@ -27,7 +27,20 @@ void	sleeping(t_philo *philo)
 	skip_time(philo->info->time_to_sleep);
 }
 
-void	thinking(t_philo *philo)
+void	thinking(t_philo *philo, bool silent)
 {
-	filter_and_output_actions(philo, THINKING);
+	int	time_to_think;
+	int	elapsed_time;
+
+	//printf("philo id : %d\n", philo->id);
+	//printf("elapsed_time : %d\n", get_time() - philo->info->start_time);
+	elapsed_time = (get_time() - philo->info->start_time - philo->last_eat_times);
+	//printf("time since last meal : %d\n", elapsed_time);
+	time_to_think = (philo->info->time_to_die - elapsed_time - philo->info->time_to_eat) / 2;
+	//printf("time_to_think : %d\n", time_to_think);
+	if (time_to_think < 0)
+		time_to_think = 0;
+	if (silent == false)
+		filter_and_output_actions(philo, THINKING);
+	skip_time(time_to_think);
 }

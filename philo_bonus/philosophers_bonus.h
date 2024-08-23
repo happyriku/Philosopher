@@ -80,7 +80,7 @@ int		get_time(void);
 void	taking_fork(t_philo *philo);
 void	eating_spaghetti(t_philo *philo);
 void	sleeping(t_philo *philo);
-void	thinking(t_philo *philo);
+void	thinking(t_philo *philo, bool silent);
 void	filter_and_output_actions(t_philo *philo, t_action action);
 void	skip_time(int time);
 char	*color(t_color color);
