@@ -24,6 +24,7 @@ void	player_info_init(t_player *philo, t_info *info, int num)
 	philo->last_eat_time = 0;
 	philo->eat_count = 0;
 	philo->is_eaten = false;
+	philo->eat_count = 0;
 }
 
 void	mutex_init(t_info *info)
@@ -47,6 +48,7 @@ void	info_init(t_info *info)
 
 	info->start_times = 0;
 	info->is_done = false;
+	info->count = 0;
 	mutex_init(info);
 	i = 0;
 	while (i < info->num_of_philo)
