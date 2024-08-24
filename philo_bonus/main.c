@@ -14,8 +14,11 @@ void	cleanup_semaphore(t_info *info)
 	sem_unlink("/sem_stop");
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_philo");
+	//printf("--------------------\n");
 	pthread_join(info->famine_reaper_thread, NULL);
+	//printf("==================\n");
 	pthread_join(info->gluttony_reaper_thread, NULL);
+	//printf("*********************\n");
 	int i = -1;
 	while (++i < info->num_of_philo)
 		pthread_join(info->philo[i].thread, NULL);

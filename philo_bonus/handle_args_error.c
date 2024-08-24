@@ -2,6 +2,7 @@
 
 void	handle_args_error(int argc, char **argv, t_info *info)
 {
+	info->argc = argc;	
 	info->num_of_philo = ft_atoi(argv[1]);
 	info->time_to_die = ft_atoi(argv[2]);
 	info->time_to_eat = ft_atoi(argv[3]);

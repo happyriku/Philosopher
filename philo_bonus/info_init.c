@@ -6,8 +6,11 @@ void	philo_info_init(t_philo	*philo, t_info *info, int num)
 	philo->num_of_times_eaten = 0;
 	philo->id = num + 1;
 	philo->last_eat_times = 0;
-	philo->num_of_meals = 0;
 	philo->is_eaten = true;
+	if (info->argc == 6)
+		philo->num_of_meals = 0;
+	else
+		philo->num_of_meals = 1;
 }
 
 void	semaphore_init(t_info *info)
@@ -30,6 +33,7 @@ void	info_init(t_info *info)
 	int	i;
 
 	info->stop_sim = false;
+	info->is_done = false;
 	i = 0;
 	while (i < info->num_of_philo)
 	{

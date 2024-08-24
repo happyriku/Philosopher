@@ -56,6 +56,7 @@ typedef struct s_info
 	int				time_to_sleep;
 	int				num_of_times_philo_must_eat;
 	int				start_time;
+	int				argc;
 	t_philo			philo[MAX_OF_PHILO];
 	pid_t			pids[MAX_OF_PHILO];
 	sem_t			waiter;
@@ -69,6 +70,7 @@ typedef struct s_info
 	pthread_t		famine_reaper_thread;
 	pthread_t		gluttony_reaper_thread;
 	bool			stop_sim;
+	bool			is_done;
 
 }	t_info;
 
