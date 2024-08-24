@@ -90,5 +90,6 @@ char	*color(t_color color);
 void	routine(t_philo	*philo);
 bool	is_philo_dead(t_philo *philo);
 void	waiter(t_philo	*philo);
+bool	has_simulation_stop(t_info *info);
 
 #endif
