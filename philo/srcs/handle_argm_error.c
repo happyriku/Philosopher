@@ -28,7 +28,7 @@ void	handle_argm_error(int argc, char **argv, t_info *info)
 		print_error("please make sure argv[3] (0 < time_to_eat)");
 	if (info->time_to_sleep < 1)
 		print_error("please make sure argv[4] (0 < time_to_sleep)");
-	if (argc == 6 && info->num_of_times_must_eat < 0)
+	if (argc == 6 && info->num_of_times_must_eat < 1)
 		print_error("please make sure argv[5] (0 < num_of_times_must_eat)");
 	return ;
 }

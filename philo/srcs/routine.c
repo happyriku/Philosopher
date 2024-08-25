@@ -3,7 +3,9 @@
 void    check_must_eat_times(t_player *philo)
 {
     philo->eat_count++;
+    pthread_mutex_lock(&philo->info->time_mutex);
     philo->last_eat_time = get_time() - philo->info->start_times;
+    pthread_mutex_unlock(&philo->info->time_mutex);
     if (philo->eat_count == philo->info->num_of_times_must_eat
             && philo->is_eaten == false)
     {

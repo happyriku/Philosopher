@@ -73,6 +73,7 @@ typedef struct s_info
 	pthread_mutex_t print_mutex;
 	pthread_mutex_t	eaten_mutex;
 	pthread_mutex_t	done_mutex;
+	pthread_mutex_t	time_mutex;
 	bool			is_done;
 	int				count;
 }	t_info;
