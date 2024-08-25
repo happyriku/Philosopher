@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	*famine_reaper(void	*arg)
 {
@@ -14,6 +14,7 @@ void	*famine_reaper(void	*arg)
 	i = -1;
 	while (++i < info->num_of_philo)
 		kill(info->pids[i], SIGKILL);
+	return (NULL);
 }
 
 void	*gluttony_reaper(void *arg)
@@ -33,6 +34,7 @@ void	*gluttony_reaper(void *arg)
 	i = -1;
 	while (++i < info->num_of_philo)
 		kill(info->pids[i], SIGKILL);
+	return (NULL);
 }
 
 void	handle_philosophers(t_info *info)

@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	handle_a_philosopher(t_info *info)
 {

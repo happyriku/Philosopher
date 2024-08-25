@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 static void	rm_isspace(const char *str, int *i)
 {

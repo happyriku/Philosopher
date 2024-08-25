@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	philo_info_init(t_philo	*philo, t_info *info, int num)
 {
@@ -28,17 +28,21 @@ void	semaphore_init(t_info *info)
 	info->sem_philo = sem_open("/sem_philo", O_CREAT, 0644, 0);
 }
 
-void	info_init(t_info *info)
+void	info_init(t_info *info, int argc, char **argv)
 {
 	int	i;
 
+	info->argc = argc;	
+	info->num_of_philo = ft_atoi(argv[1]);
+	info->time_to_die = ft_atoi(argv[2]);
+	info->time_to_eat = ft_atoi(argv[3]);
+	info->time_to_sleep = ft_atoi(argv[4]);
+	if (argc == 6)
+		info->num_of_times_philo_must_eat = ft_atoi(argv[5]);
 	info->stop_sim = false;
 	info->is_done = false;
-	i = 0;
-	while (i < info->num_of_philo)
-	{
+	i = -1;
+	while (++i < info->num_of_philo)
 		philo_info_init(&info->philo[i], info, i);
-		i++;
-	}
 	semaphore_init(info);
 }

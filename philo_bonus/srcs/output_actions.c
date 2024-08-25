@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	output_actions(t_philo *philo, t_action action)
 {

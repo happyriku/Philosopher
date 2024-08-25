@@ -76,9 +76,9 @@ typedef struct s_info
 
 void	print_error(char *message);
 int		main(int argc, char	**argv);
-void	handle_args_error(int argc, char **argv, t_info *info);
+void	handle_args_error(t_info *info, int argc);
 int		ft_atoi(const char *str);
-void	info_init(t_info *info);
+void	info_init(t_info *info, int argc, char **argv);
 void	handle_philosophers(t_info *info);
 void	handle_a_philosopher(t_info *info);
 int		get_time(void);

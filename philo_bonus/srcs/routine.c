@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 bool	is_philo_dead(t_philo *philo)
 {
@@ -33,6 +33,7 @@ void	*individual_grim_reaper(void	*arg)
 		}
 		usleep(100);
 	}
+	return (NULL);
 }
 
 void    routine(t_philo	*philo)

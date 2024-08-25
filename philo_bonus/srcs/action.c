@@ -1,9 +1,7 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	taking_fork(t_philo *philo)
 {
-	int value;
-
 	sem_wait(philo->info->sem_fork);
 	filter_and_output_actions(philo, TAKING);
 	sem_wait(philo->info->sem_fork);

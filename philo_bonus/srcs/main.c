@@ -1,4 +1,4 @@
-#include "philosophers_bonus.h"
+#include "../include/philosophers_bonus.h"
 
 void	cleanup_semaphore(t_info *info)
 {
@@ -14,11 +14,8 @@ void	cleanup_semaphore(t_info *info)
 	sem_unlink("/sem_stop");
 	sem_unlink("/sem_dead");
 	sem_unlink("/sem_philo");
-	//printf("--------------------\n");
 	pthread_join(info->famine_reaper_thread, NULL);
-	//printf("==================\n");
 	pthread_join(info->gluttony_reaper_thread, NULL);
-	//printf("*********************\n");
 	int i = -1;
 	while (++i < info->num_of_philo)
 		pthread_join(info->philo[i].thread, NULL);
@@ -38,7 +35,6 @@ int	kill_all_philosophers_if_one_died(t_info *info, pid_t pid)
 {
 	int	i;
 	int status;
-	int res;
 
 	while (pid && waitpid(pid, &status, WNOHANG) != 0)
 	{
@@ -76,12 +72,12 @@ void	stop_simulation(t_info *info)
 int	main(int argc, char	**argv)
 {
 	t_info	info;
-	int		i;
 
 	if (!(argc == 5 || argc == 6))
 		print_error("The arguments are different");
-	handle_args_error(argc, argv, &info);
-	info_init(&info);
+	if (!is_valid_input(argc, argv))
+		return (1);
+	info_init(&info, argc, argv);
 	info.start_time = get_time();
 	if (info.num_of_philo == 1)
 		handle_a_philosopher(&info);
