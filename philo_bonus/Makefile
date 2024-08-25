@@ -1,7 +1,6 @@
 NAME = philo_bonus
 
 SRCS = srcs/action.c \
-		srcs/ft_atoi.c \
 		srcs/handle_a_philosopher.c \
 		srcs/handle_philosophers.c \
 		srcs/info_init.c \
@@ -9,9 +8,10 @@ SRCS = srcs/action.c \
 		srcs/output_actions.c \
 		srcs/print_error.c \
 		srcs/time.c \
-		srcs/color.c \
 		srcs/routine.c\
 		srcs/is_valid_input.c\
+		utils/ft_atoi.c \
+		utils/color.c \
 
 OBJS = $(SRCS:.c=.o)
 

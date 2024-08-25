@@ -2,7 +2,6 @@
 
 void	*famine_reaper(void	*arg)
 {
-	int	i;
 	t_info	*info;
 
 	info = (t_info *)arg;
@@ -11,9 +10,7 @@ void	*famine_reaper(void	*arg)
 	sem_wait(info->sem_done);
 	info->is_done = true;
 	sem_post(info->sem_philo);
-	i = -1;
-	while (++i < info->num_of_philo)
-		kill(info->pids[i], SIGKILL);
+	kill_all_philosophers(info);
 	return (NULL);
 }
 
@@ -31,9 +28,7 @@ void	*gluttony_reaper(void *arg)
 		sem_wait(info->sem_philo);
 	}
 	sem_post(info->sem_done);
-	i = -1;
-	while (++i < info->num_of_philo)
-		kill(info->pids[i], SIGKILL);
+	kill_all_philosophers(info);
 	return (NULL);
 }
 
@@ -42,12 +37,17 @@ void	handle_philosophers(t_info *info)
 	int		i;
 	pid_t	pid;
 
+	info->start_time = get_time();
     i = 0;
     while (i < info->num_of_philo)
     {
 		pid = fork();
 		if (pid == -1)
-			print_error("failed to fork()");
+		{
+			sem_wait(info->sem_error);
+			kill_all_philosophers(info);
+			print_error("failed fork");
+		}
         else if (pid > 0)
 			info->pids[i] = pid;
 		else if (pid == 0)

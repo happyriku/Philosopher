@@ -19,6 +19,7 @@ void	*individual_grim_reaper(void	*arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		sem_wait(philo->info->sem_shared);
 		if (philo->info->time_to_die <= get_time() - philo->info->start_time - philo->last_eat_times)
 		{
 			sem_wait(philo->info->sem_dead);
@@ -31,6 +32,7 @@ void	*individual_grim_reaper(void	*arg)
 			sem_post(philo->info->sem_philo);
 			philo->is_eaten = false;
 		}
+		sem_post(philo->info->sem_shared);
 		usleep(100);
 	}
 	return (NULL);
@@ -38,7 +40,8 @@ void	*individual_grim_reaper(void	*arg)
 
 void    routine(t_philo	*philo)
 {
-	pthread_create(&philo->thread, NULL, individual_grim_reaper, (void	*)philo);
+	if (pthread_create(&philo->thread, NULL, individual_grim_reaper, (void	*)philo) != 0)
+		print_error("pthread_create error");
 	if (philo->id % 2 != 0)
 		thinking(philo, true);
     while (1)
