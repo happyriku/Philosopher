@@ -72,6 +72,7 @@ typedef struct s_info
 	sem_t			*sem_dead;
 	sem_t			*sem_error;
 	sem_t			*sem_shared;
+	sem_t			*sem_see;
 	pthread_t		famine_reaper_thread;
 	pthread_t		gluttony_reaper_thread;
 	bool			stop_sim;

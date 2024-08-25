@@ -8,7 +8,9 @@ void	*famine_reaper(void	*arg)
 	while (info->start_time == 0)
 		usleep(100);
 	sem_wait(info->sem_done);
+	sem_wait(info->sem_see);
 	info->is_done = true;
+	sem_post(info->sem_see);
 	sem_post(info->sem_philo);
 	kill_all_philosophers(info);
 	return (NULL);
@@ -23,8 +25,10 @@ void	*gluttony_reaper(void *arg)
 	i = -1;
 	while (++i < info->num_of_philo)
 	{
+		sem_wait(info->sem_see);
 		if (info->is_done)
 			return (NULL);
+		sem_post(info->sem_see);
 		sem_wait(info->sem_philo);
 	}
 	sem_post(info->sem_done);

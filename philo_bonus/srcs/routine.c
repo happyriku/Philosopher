@@ -25,6 +25,7 @@ void	*individual_grim_reaper(void	*arg)
 			sem_wait(philo->info->sem_dead);
 			filter_and_output_actions(philo, DIE);
 			sem_post(philo->info->sem_done);
+			sem_post(philo->info->sem_shared);
 			break ;
 		}
 		if (philo->num_of_meals == philo->info->num_of_times_philo_must_eat && philo->is_eaten)

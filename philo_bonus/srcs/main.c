@@ -19,6 +19,7 @@ void	cleanup_info(t_info *info)
 	sem_close(info->sem_philo);
 	sem_close(info->sem_error);
 	sem_close(info->sem_shared);
+	sem_close(info->sem_see);
 	sem_unlink("/sem_done");
 	sem_unlink("/sem_print");
 	sem_unlink("/sem_fork");
@@ -27,6 +28,7 @@ void	cleanup_info(t_info *info)
 	sem_unlink("/sem_philo");
 	sem_unlink("/sem_error");
 	sem_unlink("/sem_shared");
+	sem_unlink("/sem_see");
 	pthread_join(info->famine_reaper_thread, NULL);
 	pthread_join(info->gluttony_reaper_thread, NULL);
 	int i = -1;

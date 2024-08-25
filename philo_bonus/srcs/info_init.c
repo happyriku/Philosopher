@@ -23,6 +23,7 @@ void	semaphore_init(t_info *info)
 	sem_unlink("/sem_time");
 	sem_unlink("/sem_philo");
 	sem_unlink("/sem_shared");
+	sem_unlink("/sem_see");
 	info->sem_fork = sem_open("/sem_fork", O_CREAT, 0644, info->num_of_philo);
 	info->sem_done = sem_open("/sem_done", O_CREAT, 0644, 0);
 	info->sem_print = sem_open("/sem_print", O_CREAT, 0644, 1);
@@ -31,6 +32,7 @@ void	semaphore_init(t_info *info)
 	info->sem_philo = sem_open("/sem_philo", O_CREAT, 0644, 0);
 	info->sem_error = sem_open("/sem_error", O_CREAT, 0644, 1);
 	info->sem_shared = sem_open("/sem_shared", O_CREAT, 0644, 1);
+	info->sem_see = sem_open("/sem_see", O_CREAT, 0644, 1);
 }
 
 void	info_init(t_info *info, int argc, char **argv)
