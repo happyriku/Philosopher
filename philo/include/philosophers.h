@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <stdbool.h>
 # include <sys/time.h>
-# include <semaphore.h>
 # include <limits.h>
 
 # define MAX_OF_PHILO 201
@@ -45,7 +44,7 @@ typedef enum e_action
 	DIE,
 }	t_action;
 
-typedef struct s_info t_info;
+typedef struct s_info	t_info;
 
 typedef struct s_player
 {
@@ -69,8 +68,8 @@ typedef struct s_info
 	int				num_of_times_must_eat;
 	int				start_times;
 	t_player		philo[MAX_OF_PHILO];
-	pthread_mutex_t fork[MAX_OF_PHILO];
-	pthread_mutex_t print_mutex;
+	pthread_mutex_t	fork[MAX_OF_PHILO];
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	eaten_mutex;
 	pthread_mutex_t	done_mutex;
 	pthread_mutex_t	time_mutex;
@@ -84,20 +83,20 @@ void	handle_argm_error(int argc, char **argv, t_info *info);
 void	info_init(t_info *info);
 void	handle_a_philosopher(t_info *info);
 int		get_time(void);
-void    classify_by_actions(t_player *philo, t_action action);
-void    taking_fork(t_player *philo);
-void    eating_spaghetti(t_player *philo);
-void    sleeping(t_player *philo);
-void    thinking(t_player *philo);
+void	classify_by_actions(t_player *philo, t_action action);
+void	taking_fork(t_player *philo);
+void	eating_spaghetti(t_player *philo);
+void	sleeping(t_player *philo);
+void	thinking(t_player *philo);
 void	skip_to_time(int target_time, t_info *info);
-void    output_action(t_player *philo, t_action action);
-void    handle_philosophers(t_info *info);
+void	output_action(t_player *philo, t_action action);
+void	handle_philosophers(t_info *info);
 char	*color(t_color color);
-bool    check_is_died(t_player *philo);
-void    *routine(void *philosopher);
-void    *monitor(t_player *philo);
-void    check_must_eat_times(t_player *philo);
-void    mutex_destroy(t_info *info);
+bool	check_is_died(t_player *philo);
+void	*routine(void *philosopher);
+void	*monitor(t_player *philo);
+void	check_must_eat_times(t_player *philo);
+void	mutex_destroy(t_info *info);
 int		ft_atoi(const char *str);
 
 #endif

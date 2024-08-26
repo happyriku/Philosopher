@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:41:00 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:41:00 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers.h"
 
 int	main(int argc, char **argv)
@@ -13,5 +25,5 @@ int	main(int argc, char **argv)
 	else
 		handle_philosophers(&info);
 	mutex_destroy(&info);
-    return (0);
+	return (0);
 }

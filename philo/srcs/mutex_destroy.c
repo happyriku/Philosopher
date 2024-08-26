@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mutex_destroy.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:41:21 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:41:21 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers.h"
 
-void    mutex_destroy(t_info *info)
+void	mutex_destroy(t_info *info)
 {
-    int i;
+	int	i;
 
-    i = 0;
+	i = 0;
 	while (i < info->num_of_philo)
 	{
 		if (pthread_mutex_destroy(&info->fork[i]) != 0)
