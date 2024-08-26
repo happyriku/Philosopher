@@ -99,5 +99,6 @@ bool	is_philo_dead(t_philo *philo);
 bool	has_simulation_stop(t_info *info);
 bool	is_valid_input(int argc, char **argv);
 void	kill_all_philosophers(t_info *info);
+void	cleanup_info(t_info *info);
 
 #endif

@@ -8,8 +8,9 @@ SRCS = srcs/action.c \
 		srcs/output_actions.c \
 		srcs/print_error.c \
 		srcs/time.c \
-		srcs/routine.c\
-		srcs/is_valid_input.c\
+		srcs/routine.c \
+		srcs/is_valid_input.c \
+		srcs/cleanup_info.c \
 		utils/ft_atoi.c \
 		utils/color.c \
 
