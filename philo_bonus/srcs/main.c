@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:07:55 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:07:55 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 void	kill_all_philosophers(t_info *info)
@@ -21,7 +33,7 @@ bool	has_simulation_stop(t_info *info)
 
 int	check_philosopher_is_dead(t_info *info, pid_t pid)
 {
-	int status;
+	int	status;
 
 	while (pid && waitpid(pid, &status, WNOHANG) != 0)
 	{
@@ -58,7 +70,8 @@ int	main(int argc, char	**argv)
 
 	if (!is_valid_input(argc, argv))
 		return (EXIT_FAILURE);
-	info_init(&info, argc, argv);
+	if (!init_info(&info, argc, argv))
+		return (EXIT_FAILURE);
 	if (info.num_of_philo == 1)
 		handle_a_philosopher(&info);
 	else

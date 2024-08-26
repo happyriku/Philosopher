@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:08:28 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:08:28 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 char	*color(t_color color)
@@ -16,5 +28,4 @@ char	*color(t_color color)
 		return ("\x1b[39m");
 	else
 		return (NULL);
-
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup_info.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:07:09 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:07:09 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 void	cleanup_sem(t_info *info)
@@ -24,9 +36,11 @@ void	cleanup_sem(t_info *info)
 
 void	cleanup_info(t_info *info)
 {
+	int	i;
+
 	pthread_join(info->famine_reaper_thread, NULL);
 	pthread_join(info->gluttony_reaper_thread, NULL);
-	int i = -1;
+	i = -1;
 	while (++i < info->num_of_philo)
 		pthread_join(info->philo[i].thread, NULL);
 	cleanup_sem(info);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_philosophers.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:07:30 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:07:30 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 void	*famine_reaper(void	*arg)
@@ -18,7 +30,7 @@ void	*famine_reaper(void	*arg)
 
 void	*gluttony_reaper(void *arg)
 {
-	t_info *info;
+	t_info	*info;
 	int		i;
 
 	info = (t_info *)arg;
@@ -42,22 +54,23 @@ void	handle_philosophers(t_info *info)
 	pid_t	pid;
 
 	info->start_time = get_time();
-    i = 0;
-    while (i < info->num_of_philo)
-    {
+	i = -1;
+	while (++i < info->num_of_philo)
+	{
 		pid = fork();
 		if (pid == -1)
 		{
 			sem_wait(info->sem_error);
 			kill_all_philosophers(info);
-			print_error("failed fork");
+			print_error("fork failed", info);
 		}
-        else if (pid > 0)
+		else if (pid > 0)
 			info->pids[i] = pid;
 		else if (pid == 0)
 			routine(&info->philo[i]);
-        i++;
-    }
-	pthread_create(&info->famine_reaper_thread, NULL, famine_reaper, (void	*)info);
-	pthread_create(&info->gluttony_reaper_thread, NULL, gluttony_reaper, (void *)info);
+	}
+	pthread_create(&info->famine_reaper_thread, NULL,
+		famine_reaper, (void *)info);
+	pthread_create(&info->gluttony_reaper_thread, NULL,
+		gluttony_reaper, (void *)info);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosophers_bonus.h                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:09:27 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:09:27 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHERS_BONUS_H
 # define PHILOSOPHERS_BONUS_H
 
@@ -12,13 +24,12 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 # define MAX_OF_PHILO 200
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
-
-# define KILL_CHILO_PHILO -1
 
 typedef struct s_info	t_info;
 
@@ -39,7 +50,6 @@ typedef enum s_color
 	YELLOW,
 	BOLD,
 	STOP,
-	
 }	t_color;
 
 typedef struct s_philo
@@ -49,7 +59,7 @@ typedef struct s_philo
 	int			num_of_times_eaten;
 	int			last_eat_times;
 	int			num_of_meals;
-	bool		is_eaten;
+	bool		is_full;
 	pthread_t	thread;
 }	t_philo;
 
@@ -80,10 +90,10 @@ typedef struct s_info
 
 }	t_info;
 
-void	print_error(char *message);
+void	print_error(char *message, t_info *info);
 int		main(int argc, char	**argv);
 int		ft_atoi(const char *str);
-void	info_init(t_info *info, int argc, char **argv);
+bool	init_info(t_info *info, int argc, char **argv);
 void	handle_philosophers(t_info *info);
 void	handle_a_philosopher(t_info *info);
 int		get_time(void);
@@ -100,5 +110,6 @@ bool	has_simulation_stop(t_info *info);
 bool	is_valid_input(int argc, char **argv);
 void	kill_all_philosophers(t_info *info);
 void	cleanup_info(t_info *info);
+void	cleanup_sem(t_info *info);
 
 #endif

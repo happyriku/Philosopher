@@ -3,7 +3,7 @@ NAME = philo_bonus
 SRCS = srcs/action.c \
 		srcs/handle_a_philosopher.c \
 		srcs/handle_philosophers.c \
-		srcs/info_init.c \
+		srcs/init_info.c \
 		srcs/main.c \
 		srcs/output_actions.c \
 		srcs/print_error.c \

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rishibas <rishibas@student.42.fr>          #+#  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024-08-26 06:06:56 by rishibas          #+#    #+#             */
+/*   Updated: 2024-08-26 06:06:56 by rishibas         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/philosophers_bonus.h"
 
 void	taking_fork(t_philo *philo)
@@ -31,8 +43,10 @@ void	thinking(t_philo *philo, bool silent)
 	int	time_to_think;
 	int	elapsed_time;
 
-	elapsed_time = (get_time() - philo->info->start_time - philo->last_eat_times);
-	time_to_think = (philo->info->time_to_die - elapsed_time - philo->info->time_to_eat) / 2;
+	elapsed_time = (get_time() - philo->info->start_time
+			- philo->last_eat_times);
+	time_to_think = (philo->info->time_to_die - elapsed_time
+			- philo->info->time_to_eat) / 2;
 	if (time_to_think < 0)
 		time_to_think = 0;
 	if (silent == false)
