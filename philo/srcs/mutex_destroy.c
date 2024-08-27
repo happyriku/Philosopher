@@ -27,4 +27,5 @@ void	mutex_destroy(t_info *info)
 	pthread_mutex_destroy(&info->eaten_mutex);
 	pthread_mutex_destroy(&info->done_mutex);
 	pthread_mutex_destroy(&info->time_mutex);
+	pthread_mutex_destroy(&info->think_mutex);
 }

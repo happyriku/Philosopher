@@ -30,6 +30,7 @@ void	handle_philosophers(t_info *info)
 	i = 0;
 	while (i < info->num_of_philo)
 	{
+		printf("philo id : %d\n", info->philo->id);
 		pthread_join(info->philo[i].thread, NULL);
 		i++;
 	}
