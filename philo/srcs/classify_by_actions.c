@@ -18,16 +18,16 @@ void	output_action(t_player *philo, t_action action)
 
 	elapsed_time = get_time() - philo->info->start_times;
 	if (action == TAKING)
-		printf("%s%d %d has taken a fork%s\n",color(GREEN), 
+		printf("%s%d %d has taken a fork%s\n", color(GREEN),
 			elapsed_time, philo->id, color(STOP));
 	else if (action == EATING)
-		printf("%s%d %d is eating%s\n",color(YELLOW),
+		printf("%s%d %d is eating%s\n", color(YELLOW),
 			elapsed_time, philo->id, color(STOP));
 	else if (action == SLEEPING)
 		printf("%s%d %d is sleeping%s\n", color(BLUE),
 			elapsed_time, philo->id, color(STOP));
 	else if (action == THINKING)
-		printf("%s%d %d is thinking%s\n",color(BOLD),
+		printf("%s%d %d is thinking%s\n", color(BOLD),
 			elapsed_time, philo->id, color(STOP));
 }
 
@@ -39,7 +39,7 @@ void	classify_by_actions(t_player *philo, t_action action)
 	if (action == DIE)
 	{
 		elapsed_time = get_time() - philo->info->start_times;
-		printf("%s%d %d died\n",color(RED), elapsed_time, philo->id);
+		printf("%s%d %d died\n", color(RED), elapsed_time, philo->id);
 		pthread_mutex_lock(&philo->info->done_mutex);
 		philo->info->is_done = true;
 		pthread_mutex_unlock(&philo->info->done_mutex);
