@@ -48,6 +48,5 @@ void	*routine(void *philosopher)
 		sleeping(philo);
 		thinking(philo);
 	}
-	printf("----------------\n");
 	return (NULL);
 }

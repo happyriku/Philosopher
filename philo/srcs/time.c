@@ -32,7 +32,10 @@ void	skip_to_time(int target_time, t_info *info)
 	{
 		pthread_mutex_lock(&info->done_mutex);
 		if (info->is_done)
+		{
+			pthread_mutex_unlock(&info->done_mutex);
 			break ;
+		}
 		pthread_mutex_unlock(&info->done_mutex);
 	}
 	return ;

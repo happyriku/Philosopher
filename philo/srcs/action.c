@@ -14,7 +14,6 @@
 
 void	taking_fork(t_player *philo)
 {
-	printf("-----------\n");
 	pthread_mutex_lock(&philo->info->fork[philo->left_fork]);
 	classify_by_actions(philo, TAKING);
 	pthread_mutex_lock(&philo->info->fork[philo->right_fork]);
