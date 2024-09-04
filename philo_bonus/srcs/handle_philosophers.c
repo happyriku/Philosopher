@@ -17,8 +17,6 @@ void	*famine_reaper(void	*arg)
 	t_info	*info;
 
 	info = (t_info *)arg;
-	while (info->start_time == 0)
-		usleep(100);
 	sem_wait(info->sem_done);
 	sem_wait(info->sem_see);
 	info->is_done = true;

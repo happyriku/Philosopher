@@ -57,6 +57,7 @@ typedef struct s_player
 	int				last_eat_time;
 	int				eat_count;
 	bool			is_eaten;
+	bool			monitor_done;
 }	t_player;
 
 typedef struct s_info
@@ -99,5 +100,6 @@ void	*monitor(t_player *philo);
 void	check_must_eat_times(t_player *philo);
 void	mutex_destroy(t_info *info);
 int		ft_atoi(const char *str);
+bool	check_is_done(t_player	*philo);
 
 #endif

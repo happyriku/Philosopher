@@ -26,18 +26,28 @@ bool	check_is_died(t_player *philo)
 	return (false);
 }
 
+bool	check_is_done(t_player	*philo)
+{
+	pthread_mutex_lock(&philo->info->done_mutex);
+	if (philo->info->is_done)
+	{
+		pthread_mutex_unlock(&philo->info->done_mutex);
+		return (true);
+	}
+	pthread_mutex_unlock(&philo->info->done_mutex);
+	return (false);
+}
+
 void	*monitor(t_player *philo)
 {
 	int	i;
 
 	i = 0;
-	while (!philo->info->is_done)
+	while (!check_is_done(philo))
 	{
 		if (check_is_died(&philo[i]))
 			break ;
-		i++;
-		if (i == philo->info->num_of_philo)
-			i = 0;
+		i = (i + 1) % philo->info->num_of_philo;
 	}
 	return (NULL);
 }

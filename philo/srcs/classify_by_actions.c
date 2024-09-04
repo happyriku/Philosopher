@@ -46,7 +46,8 @@ void	classify_by_actions(t_player *philo, t_action action)
 	}
 	else
 	{
-		if (!philo->info->is_done)
+			usleep(1000);
+		if (!check_is_done(philo))
 			output_action(philo, action);
 	}
 	pthread_mutex_unlock(&philo->info->print_mutex);

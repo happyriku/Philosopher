@@ -41,7 +41,7 @@ void	*routine(void *philosopher)
 	philo = (t_player *)philosopher;
 	if (philo->id % 2 != 0)
 		skip_to_time(100, philo->info);
-	while (!philo->info->is_done)
+	while (!check_is_done(philo))
 	{
 		taking_fork(philo);
 		eating_spaghetti(philo);
