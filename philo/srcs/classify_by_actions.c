@@ -40,13 +40,10 @@ void	classify_by_actions(t_player *philo, t_action action)
 	{
 		elapsed_time = get_time() - philo->info->start_times;
 		printf("%s%d %d died\n", color(RED), elapsed_time, philo->id);
-		pthread_mutex_lock(&philo->info->done_mutex);
-		philo->info->is_done = true;
-		pthread_mutex_unlock(&philo->info->done_mutex);
 	}
 	else
 	{
-		usleep(1000);
+		usleep(100);
 		if (!check_is_done(philo))
 			output_action(philo, action);
 	}

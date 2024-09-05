@@ -19,6 +19,9 @@ bool	check_is_died(t_player *philo)
 		- philo->info->start_times - philo->last_eat_time)
 	{
 		pthread_mutex_unlock(&philo->info->time_mutex);
+		pthread_mutex_lock(&philo->info->done_mutex);
+		philo->info->is_done = true;
+		pthread_mutex_unlock(&philo->info->done_mutex);
 		classify_by_actions(philo, DIE);
 		return (true);
 	}
