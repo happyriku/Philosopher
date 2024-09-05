@@ -46,7 +46,7 @@ void	classify_by_actions(t_player *philo, t_action action)
 	}
 	else
 	{
-			usleep(1000);
+		usleep(1000);
 		if (!check_is_done(philo))
 			output_action(philo, action);
 	}
