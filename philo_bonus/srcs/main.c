@@ -73,7 +73,10 @@ int	main(int argc, char	**argv)
 	if (!init_info(&info, argc, argv))
 		return (EXIT_FAILURE);
 	if (info.num_of_philo == 1)
+	{
 		handle_a_philosopher(&info);
+		return (EXIT_SUCCESS);
+	}
 	else
 		handle_philosophers(&info);
 	stop_simulation(&info);
